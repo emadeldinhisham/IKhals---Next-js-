@@ -6,67 +6,63 @@ import Magnetic from "@/components/effects/Magnetic";
 
 export default function Products() {
 
-  const products = [
+ const products = [
+
   {
     title: "أكياس BOPP",
-    image: "/img/logo2.jpg",
-    desc:"أكياس عالية الجودة للطباعة.",
+    image: "/img/p1.jpg",
     features: [
       "Double-Sided Printing (Up to 8 Colors)",
       "Optional BOPP Layer",
-      "Single or Double-Sided Lamination",
-      "High Durability & Protection"
+      "High Durability"
     ],
     specs: [
       "Width: 35cm - 80cm",
       "Length: 40cm - 125cm"
     ]
   },
+
   {
-    title: "أكياس BOPP",
-    image: "/img/logo2.jpg",
-    desc:"أكياس عالية الجودة للطباعة.",
+    title: "أكياس منسوجة",
+    image: "/img/p2.jpg",
     features: [
-      "Double-Sided Printing (Up to 8 Colors)",
-      "Optional BOPP Layer",
-      "Single or Double-Sided Lamination",
-      "High Durability & Protection"
+      "Heavy Duty Material",
+      "High Load Capacity",
+      "UV Protection"
     ],
     specs: [
-      "Width: 35cm - 80cm",
-      "Length: 40cm - 125cm"
+      "Width: 50cm - 100cm",
+      "Length: Custom"
     ]
   },
+
   {
-    title: "أكياس BOPP",
-    image: "/img/logo2.jpg",
-    desc:"أكياس عالية الجودة للطباعة.",
+    title: "أكياس مغلفة",
+    image: "/img/p3.jpg",
     features: [
-      "Double-Sided Printing (Up to 8 Colors)",
-      "Optional BOPP Layer",
-      "Single or Double-Sided Lamination",
-      "High Durability & Protection"
+      "Water Resistant",
+      "Extra Protection Layer"
     ],
     specs: [
-      "Width: 35cm - 80cm",
-      "Length: 40cm - 125cm"
+      "Thickness: 120 micron",
+      "Custom Sizes"
     ]
   },
+
   {
-    title: "أكياس BOPP",
-    image: "/img/logo2.jpg",
-    desc:"أكياس عالية الجودة للطباعة.",
+    title: "أكياس مطبوعة",
+    image: "/img/p4.jpg",
     features: [
-      "Double-Sided Printing (Up to 8 Colors)",
-      "Optional BOPP Layer",
-      "Single or Double-Sided Lamination",
-      "High Durability & Protection"
+      "High Quality Printing",
+      "Custom Branding",
+      "Gloss Finish"
     ],
     specs: [
-      "Width: 35cm - 80cm",
-      "Length: 40cm - 125cm"
+      "Up to 8 colors",
+      "Custom Dimensions"
     ]
-  },
+  }
+
 ];
 
 

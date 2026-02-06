@@ -1,8 +1,31 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 export default function Hero() {
+
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+
+    const handleScroll = () => {
+
+      if (!imageRef.current) return;
+
+      const scrollY = window.scrollY;
+
+      imageRef.current.style.transform =
+        `translateY(${scrollY * 0.15}px)`;
+
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+
+  }, []);
+
 
   return (
 
@@ -78,8 +101,11 @@ export default function Hero() {
 
         </div>
  {/* IMAGE */}
+<div
+  ref={imageRef}
+  className="relative h-[80vh] rounded-[60px] overflow-hidden border border-white/10 transition-transform duration-300"
+>
 
-          <div className="relative w-full max-w-xl aspect-square rounded-[80px_160px_80px_160px] overflow-hidden border-4 border-white/20 shadow-2xl animate-float z-10">
 
           <Image
             src="/img/hero.png"

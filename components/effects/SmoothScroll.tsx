@@ -5,21 +5,21 @@ import Lenis from "@studio-freight/lenis";
 
 export default function SmoothScroll() {
 
-  useEffect(()=>{
+  useEffect(() => {
 
     const lenis = new Lenis({
-      smooth:true,
-      lerp:0.08
+      duration: 1.2,
+      smoothWheel: true,
     });
 
-    function raf(time:any){
+    function raf(time:any) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
 
     requestAnimationFrame(raf);
 
-  },[]);
+  }, []);
 
   return null;
 }

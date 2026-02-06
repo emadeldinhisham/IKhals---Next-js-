@@ -1,47 +1,97 @@
 "use client";
 
-import { impactStats } from "@/data/impact";
-
-const COLORS = {
-  blue: { bg: "bg-blue-500/10", text: "text-blue-500", bar: "bg-blue-500" },
-  green:{ bg: "bg-green-500/10", text:"text-green-500", bar:"bg-green-500" },
-  gold: { bg: "bg-yellow-500/10", text:"text-yellow-500", bar:"bg-yellow-500" },
-};
+import Reveal from "@/components/effects/Reveal";
 
 export default function Impact() {
-  return (
-    <section className="py-32">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
-          <span className="text-yellow-500 text-sm font-bold tracking-widest uppercase">
-            الأرقام تتحدث
-          </span>
-          <h2 className="text-4xl md:text-5xl font-black mt-4">
-            قدراتنا الإنتاجية
-          </h2>
-        </div>
+const stats = [
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {impactStats.map((stat, i) => {
-            const c = COLORS[stat.color as keyof typeof COLORS];
-            return (
-              <div key={i} className="p-10 rounded-3xl bg-white/5 border border-white/10">
-                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${c.bg}`}>
-                  <span className={`text-xl font-black ${c.text}`}>
-                    {stat.value}{stat.unit}
-                  </span>
-                </div>
-                <p className="text-sm uppercase tracking-wider opacity-70 mb-2">
-                  {stat.label}
-                </p>
-                <div className="mt-6 h-1.5 bg-white/10 rounded-full overflow-hidden">
-                  <div className={`${c.bar} h-full`} style={{ width: "80%" }} />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
+{
+title:"طن إنتاج سنوياً",
+value:"5K+",
+color:"text-blue-400"
+},
+
+{
+title:"دولة تصدير",
+value:"10+",
+color:"text-yellow-400"
+},
+
+{
+title:"قطاع صناعي نخدمه",
+value:"12+",
+color:"text-green-400"
+}
+
+];
+
+
+return(
+
+<section className="relative py-40 overflow-hidden bg-[#020617]">
+
+{/* INDUSTRIAL BACKGROUND */}
+
+<div className="absolute inset-0 pointer-events-none">
+
+<div className="absolute inset-0 opacity-20
+bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]
+bg-[size:80px_80px]" />
+
+<div className="absolute top-0 left-0 w-[600px] h-[600px]
+bg-blue-500/10 blur-[200px]" />
+
+</div>
+
+<div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+
+<Reveal>
+
+<h2 className="text-5xl font-black text-white mb-24">
+
+قدراتنا الصناعية
+
+</h2>
+
+</Reveal>
+
+
+<div className="grid md:grid-cols-3 gap-12">
+
+{stats.map((s,i)=>(
+
+<Reveal key={i}>
+
+<div className="
+p-16 rounded-[40px]
+bg-gradient-to-b from-white/5 to-white/0
+border border-white/10
+backdrop-blur-xl
+transition duration-500
+hover:scale-[1.05]
+hover:border-yellow-500/40
+">
+
+<h3 className={`text-6xl font-black mb-6 ${s.color}`}>
+{s.value}
+</h3>
+
+<p className="text-lg text-gray-300">
+{s.title}
+</p>
+
+</div>
+
+</Reveal>
+
+))}
+
+</div>
+
+</div>
+
+</section>
+
+)
+
 }

@@ -2,32 +2,52 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function Reveal({children}:any){
+export default function Reveal({ children }) {
 
- const ref = useRef(null);
- const [show,setShow]=useState(false);
+  const ref = useRef(null);
+  const [visible,setVisible]=useState(false);
 
- useEffect(()=>{
+  useEffect(()=>{
 
-  const observer = new IntersectionObserver(([entry])=>{
-    if(entry.isIntersecting){
-      setShow(true);
-      observer.disconnect();
+    const observer = new IntersectionObserver(
+
+      ([entry])=>{
+        if(entry.isIntersecting){
+          setVisible(true);
+        }
+      },
+
+      {
+        threshold:0.15
+      }
+
+    );
+
+    if(ref.current){
+      observer.observe(ref.current);
     }
-  });
 
-  if(ref.current) observer.observe(ref.current);
+    return ()=>observer.disconnect();
 
- },[]);
+  },[]);
 
- return (
-  <div
-    ref={ref}
-    className={`transition duration-700
-    ${show ? "opacity-100 translate-y-0" :
-    "opacity-0 translate-y-10"}`}
-  >
-    {children}
-  </div>
- );
+  return(
+
+    <div
+      ref={ref}
+      className={`
+      transition-all duration-1000 ease-out
+      ${visible
+        ? "opacity-100 translate-y-0 scale-100"
+        : "opacity-0 translate-y-24 scale-[0.96]"
+      }
+      `}
+    >
+
+      {children}
+
+    </div>
+
+  )
+
 }

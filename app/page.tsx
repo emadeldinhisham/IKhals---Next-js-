@@ -16,11 +16,25 @@ export default function Home() {
     <>
       <Navbar />
       <Hero />
-      <Reveal> <Impact /></Reveal>
-      <Reveal> <About lang="ar" /></Reveal>
+     
+  <About />
+
+  <div className="h-40 bg-gradient-to-b from-transparent to-[#020617]"/>
+
+  <Impact />
+
+  <div className="h-40 bg-gradient-to-b from-[#020617] to-transparent"/>
+       <div className="h-40 bg-gradient-to-b from-[#020617] to-transparent"/>
+
+  <Products />
+       <div className="h-40 bg-gradient-to-b from-transparent to-[#020617]"/>
+
+  <Testimonials />
+
+ 
       <Reveal> <Industrial /></Reveal>
-      <Reveal><Products /></Reveal>
-      <Reveal><Testimonials lang="ar" /></Reveal>
+    
+  
       <Reveal><Certificates /></Reveal>
       <Footer />
       
