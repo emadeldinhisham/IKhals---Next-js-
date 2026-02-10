@@ -1,86 +1,62 @@
 "use client";
 
+import { useLanguage } from "@/components/providers/LanguageProvider";
 import { testimonials } from "@/data/testimonials";
-import Reveal from "@/components/effects/Reveal";
 
-type Props = {
-  lang?: "ar" | "en";
-};
+export default function Testimonials() {
 
-export default function Testimonials({ lang = "ar" }: Props) {
+const { lang, t } = useLanguage();
 
-  const list = testimonials[lang];
+const list = testimonials[lang];
 
-  return (
+return (
 
-<section className="relative py-40 overflow-hidden bg-[#020617]">
+<section className="py-40 relative overflow-hidden">
 
-{/* 🔥 GOD MODE BACKGROUND */}
-
-<div className="absolute inset-0 pointer-events-none">
-
-<div className="absolute inset-0 opacity-20
-bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]
-bg-[size:80px_80px]" />
-
-<div className="absolute top-0 left-0 w-[600px] h-[600px]
-bg-yellow-500/10 blur-[200px]" />
-
-<div className="absolute bottom-0 right-0 w-[600px] h-[600px]
-bg-blue-500/10 blur-[200px]" />
-
-</div>
-
-
-<div className="relative z-10 max-w-7xl mx-auto px-6">
+<div className="relative z-10 max-w-6xl mx-auto px-6">
 
 {/* TITLE */}
 
-<Reveal>
-<div className="text-center mb-24">
+<div className="text-center mb-20">
+
 <span className="text-yellow-500 text-sm font-bold tracking-widest uppercase">
-{lang === "ar" ? "آراء العملاء" : "Testimonials"}
+{t.testimonials.badge}
 </span>
 
-<h2 className="text-5xl font-black mt-4 text-white">
-{lang === "ar"
-? "شركاؤنا يثقون بنا"
-: "Trusted by Industry Leaders"}
+<h2 className="text-4xl md:text-5xl font-black mt-4 text-white">
+{t.testimonials.title}
 </h2>
+
 </div>
-</Reveal>
 
+{/* CARDS */}
 
-{/* GOD MODE CARDS */}
+<div className="grid md:grid-cols-3 gap-8">
 
-<div className="grid md:grid-cols-3 gap-12">
+{list.map((item,i)=>(
 
-{list.map((t,i)=>(
+<div
+key={i}
+className="p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur"
+>
 
-<Reveal key={i}>
-
-<div className="
-group p-12 rounded-[40px]
-bg-gradient-to-b from-white/5 to-white/0
-border border-white/10
-backdrop-blur-xl
-transition duration-500
-hover:scale-[1.03]
-hover:border-yellow-500/40
-">
-
-<p className="text-lg text-slate-300 leading-relaxed mb-10">
-“{t.quote}”
+<p className="text-lg text-slate-300 leading-relaxed mb-8">
+“{item.quote}”
 </p>
 
 <div>
-<p className="font-bold text-white text-lg">{t.name}</p>
-<p className="text-sm text-slate-400">{t.role}</p>
-</div>
+
+<p className="font-bold text-white">
+{item.name}
+</p>
+
+<p className="text-sm text-slate-400">
+{item.role}
+</p>
 
 </div>
 
-</Reveal>
+</div>
 
 ))}
 
@@ -90,5 +66,6 @@ hover:border-yellow-500/40
 
 </section>
 
-  );
+);
+
 }

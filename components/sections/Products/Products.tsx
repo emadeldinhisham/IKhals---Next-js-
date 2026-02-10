@@ -3,67 +3,18 @@
 import { useState } from "react";
 import Image from "next/image";
 import Magnetic from "@/components/effects/Magnetic";
+import { useLanguage } from "@/components/providers/LanguageProvider";
+
 
 export default function Products() {
+const { t } = useLanguage();
 
- const products = [
+const products = t?.products?.items || [];
 
-  {
-    title: "أكياس BOPP",
-    image: "/img/p1.jpg",
-    features: [
-      "Double-Sided Printing (Up to 8 Colors)",
-      "Optional BOPP Layer",
-      "High Durability"
-    ],
-    specs: [
-      "Width: 35cm - 80cm",
-      "Length: 40cm - 125cm"
-    ]
-  },
+// 🔥 ULTRA SAFE DATA
 
-  {
-    title: "أكياس منسوجة",
-    image: "/img/p2.jpg",
-    features: [
-      "Heavy Duty Material",
-      "High Load Capacity",
-      "UV Protection"
-    ],
-    specs: [
-      "Width: 50cm - 100cm",
-      "Length: Custom"
-    ]
-  },
+const safeProducts = products?.filter(p => p.image && p.title) || [];
 
-  {
-    title: "أكياس مغلفة",
-    image: "/img/p3.jpg",
-    features: [
-      "Water Resistant",
-      "Extra Protection Layer"
-    ],
-    specs: [
-      "Thickness: 120 micron",
-      "Custom Sizes"
-    ]
-  },
-
-  {
-    title: "أكياس مطبوعة",
-    image: "/img/p4.jpg",
-    features: [
-      "High Quality Printing",
-      "Custom Branding",
-      "Gloss Finish"
-    ],
-    specs: [
-      "Up to 8 colors",
-      "Custom Dimensions"
-    ]
-  }
-
-];
 
 
   const [selected,setSelected] = useState(null);
@@ -71,14 +22,14 @@ export default function Products() {
   return (
 
     <section id="products" className="py-40 text-white text-center">
+<h2 className="text-5xl font-black mb-20">
+  {t.products.title}
+</h2>
 
-      <h2 className="text-5xl font-black mb-20">
-        منتجاتنا
-      </h2>
 
       <div className="grid md:grid-cols-4 gap-12 max-w-7xl mx-auto">
 
-        {products.map((p,i)=>(
+{safeProducts.map((p,i)=>(
 <div
   key={i}
   className="group relative rounded-3xl overflow-hidden
@@ -91,7 +42,7 @@ export default function Products() {
   <div className="relative h-[420px]">
 
     <Image
-      src={p.image}
+src={p.image || "/img/fallback.jpg"}
       fill
       alt={p.title}
       className="object-cover transition duration-700 group-hover:scale-110"
@@ -118,7 +69,8 @@ export default function Products() {
   className="self-end bg-blue-600 px-6 py-3 rounded-xl
   font-bold hover:bg-blue-500 transition"
 >
-  التفاصيل
+{t.products.details}
+
 </button>
 
 </Magnetic>

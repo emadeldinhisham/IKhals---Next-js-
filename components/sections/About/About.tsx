@@ -1,11 +1,12 @@
 "use client";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
-import { aboutData } from "@/data/about";
+
 import Reveal from "@/components/effects/Reveal";
 
 export default function About({ lang = "ar" }) {
 
-  const data = aboutData[lang];
+ const { t } = useLanguage();
 
   return (
 
@@ -39,7 +40,8 @@ bg-blue-500/10 blur-[200px]" />
 
 <Reveal>
 <h2 className="text-6xl font-black mb-16 text-white leading-tight">
-{data.title}
+{t.about.title}
+
 </h2>
 </Reveal>
 
@@ -48,7 +50,7 @@ bg-blue-500/10 blur-[200px]" />
 
 <div className="space-y-6 max-w-4xl">
 
-{data.paragraphs.map((p,i)=>(
+{t.about.paragraphs.map((p,i)=>(
 
 <Reveal key={i}>
 <p className="text-xl text-gray-300 leading-relaxed">
@@ -75,11 +77,11 @@ backdrop-blur-xl
 hover:scale-[1.02] transition duration-500">
 
 <h3 className="text-3xl font-black text-blue-400 mb-6">
-{data.values.title}
+{t.about.valuesTitle}
 </h3>
 
 <p className="text-gray-300 leading-relaxed">
-{data.values.content}
+{t.about.valuesText}
 </p>
 
 </div>
@@ -96,11 +98,11 @@ backdrop-blur-xl
 hover:scale-[1.02] transition duration-500">
 
 <h3 className="text-3xl font-black text-yellow-400 mb-6">
-{data.whyUs.title}
+{t.about.whyTitle}
 </h3>
 
 <p className="text-gray-300 leading-relaxed">
-{data.whyUs.content}
+{t.about.whyText}
 </p>
 
 </div>
@@ -117,11 +119,11 @@ backdrop-blur-xl
 hover:scale-[1.02] transition duration-500">
 
 <h3 className="text-3xl font-black text-green-400 mb-6">
-{data.history.title}
+{t.about.historyTitle}
 </h3>
 
 <p className="text-gray-300 leading-relaxed">
-{data.history.content}
+{t.about.historyText}
 </p>
 
 </div>

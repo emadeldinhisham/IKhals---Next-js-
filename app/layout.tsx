@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import CinematicFX from "@/components/effects/CinematicFX";
 import SmoothScroll from "@/components/effects/SmoothScroll";
+import { LanguageProvider } from "@/components/providers/LanguageProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -47,7 +48,10 @@ export default function RootLayout({
       <body>
       <CinematicFX />
       <SmoothScroll />
-      {children}
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
+      
       <div className="fixed inset-0 pointer-events-none z-0">
 
   {/* Glow صناعي */}

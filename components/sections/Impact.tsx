@@ -1,29 +1,33 @@
 "use client";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 import Reveal from "@/components/effects/Reveal";
 
 export default function Impact() {
+   const { t } = useLanguage();
+ 
 const stats = [
 
 {
-title:"طن إنتاج سنوياً",
+title: t.impact.production,
 value:"5K+",
 color:"text-blue-400"
 },
 
 {
-title:"دولة تصدير",
+title: t.impact.export,
 value:"10+",
 color:"text-yellow-400"
 },
 
 {
-title:"قطاع صناعي نخدمه",
+title: t.impact.sectors,
 value:"12+",
 color:"text-green-400"
 }
 
 ];
+
 
 
 return(
@@ -49,7 +53,7 @@ bg-blue-500/10 blur-[200px]" />
 
 <h2 className="text-5xl font-black text-white mb-24">
 
-قدراتنا الصناعية
+{t.impact.title}
 
 </h2>
 

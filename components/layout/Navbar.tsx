@@ -1,23 +1,19 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function Navbar() {
 
   const [scrolled,setScrolled] = useState(false);
+  const { lang, setLang } = useLanguage();
 
   useEffect(()=>{
-
     const onScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll",onScroll);
-
     return ()=> window.removeEventListener("scroll",onScroll);
-
   },[]);
-
 
   return (
 
@@ -30,25 +26,27 @@ export default function Navbar() {
     >
 
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        
-        {/* Logo */}
+
         <div className="font-black text-xl text-white">
           الإخلاص
         </div>
 
-        {/* Navigation */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-bold text-slate-300">
-
-          <a href="#top" className="hover:text-white transition">الرئيسية</a>
-          <a href="#about" className="hover:text-white transition">من نحن</a>
-          <a href="#products" className="hover:text-white transition">المنتجات</a>
-          <a href="#certificates" className="hover:text-white transition">الاعتمادات</a>
-          <a href="#contact" className="hover:text-white transition">تواصل معنا</a>
-
+          <a href="#top">الرئيسية</a>
+          <a href="#about">من نحن</a>
+          <a href="#products">المنتجات</a>
+          <a href="#certificates">الاعتمادات</a>
+          <a href="#contact">تواصل معنا</a>
         </nav>
 
-        {/* CTA */}
         <div className="flex items-center gap-4">
+
+          <button
+            onClick={()=>setLang(lang==="ar" ? "en":"ar")}
+            className="px-4 py-2 rounded-lg bg-white/10 text-white"
+          >
+            {lang==="ar" ? "English" : "العربية"}
+          </button>
 
           <a
             href="#quote"
@@ -62,6 +60,5 @@ export default function Navbar() {
       </div>
 
     </header>
-
   );
 }

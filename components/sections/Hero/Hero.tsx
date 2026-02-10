@@ -2,8 +2,13 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function Hero() {
+
+const { t, lang } = useLanguage();
+
+
 
   const imageRef = useRef<HTMLDivElement>(null);
 
@@ -42,32 +47,30 @@ export default function Hero() {
       <div className="w-full px-10 grid lg:grid-cols-2 gap-16 items-center">
 
         {/* TEXT */}
-<div className="text-right flex flex-col items-end">
+<div className={`flex flex-col ${lang === "ar" ? "items-end text-right" : "items-start text-left"}`}>
 
           <span className="text-yellow-400 text-lg mb-6 inline-block">
-            الريادة في صناعة البلاستيك ✨
+            {t.hero.badge}
+
           </span>
 
           <h1 className="text-7xl xl:text-8xl font-black leading-tight mb-8">
 
-            الإخلاص
+            {t.hero.title}
 
             <br/>
 
             <span className="text-blue-500">
-              للصناعات البلاستيكية
+              {t.hero.subtitle}
             </span>
 
           </h1>
 
           <p className="text-xl text-gray-400 mb-12 max-w-xl">
-
-            نصنع الجودة… ونقود المستقبل عبر أحدث
-            تقنيات التصنيع الصناعية.
-
+            {t.hero.desc}
           </p>
 
-          <div className="flex gap-6 justify-end">
+          <div className={`flex gap-6 ${lang === "ar" ? "justify-end" : "justify-start"}`}>
 
           <a
   href="#products"
@@ -80,7 +83,7 @@ export default function Hero() {
   hover:scale-105
   transition duration-300"
 >
-  اكتشف منتجاتنا
+  {t.hero.cta1}
 </a>
 
 <a
@@ -94,18 +97,18 @@ export default function Hero() {
   hover:scale-105
   transition duration-300"
 >
-  تواصل معنا
+  {t.hero.cta2}
 </a>
 
           </div>
 
         </div>
+
  {/* IMAGE */}
 <div
   ref={imageRef}
   className="relative h-[80vh] rounded-[60px] overflow-hidden border border-white/10 transition-transform duration-300"
 >
-
 
           <Image
             src="/img/hero.png"
