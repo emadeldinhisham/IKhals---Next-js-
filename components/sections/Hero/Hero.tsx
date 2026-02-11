@@ -6,10 +6,7 @@ import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function Hero() {
 
-const { t, lang } = useLanguage();
-
-
-
+  const { lang, t } = useLanguage();
   const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -21,7 +18,7 @@ const { t, lang } = useLanguage();
       const scrollY = window.scrollY;
 
       imageRef.current.style.transform =
-        `translateY(${scrollY * 0.15}px)`;
+        `translateY(${scrollY * 0.08}px) scale(1.02)`;
 
     };
 
@@ -31,98 +28,100 @@ const { t, lang } = useLanguage();
 
   }, []);
 
-
   return (
 
-    <section
-      className="min-h-screen flex items-center
-      bg-[#020617] text-white relative overflow-hidden"
-    >
+<section className="min-h-screen flex items-center relative overflow-hidden bg-[#020617] text-white">
 
-      {/* GRID BACKGROUND */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none
-      bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]
-      bg-[size:80px_80px]" />
+{/* CINEMATIC BACKGROUND */}
 
-      <div className="w-full px-10 grid lg:grid-cols-2 gap-16 items-center">
+<div className="absolute inset-0">
 
-        {/* TEXT */}
-<div className={`flex flex-col ${lang === "ar" ? "items-end text-right" : "items-start text-left"}`}>
+<div className="absolute inset-0 opacity-20
+bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]
+bg-[size:80px_80px]" />
 
-          <span className="text-yellow-400 text-lg mb-6 inline-block">
-            {t.hero.badge}
+<div className="absolute top-[-200px] left-[10%] w-[600px] h-[600px]
+bg-yellow-500/10 blur-[160px] rounded-full"/>
 
-          </span>
+<div className="absolute bottom-[-200px] right-[10%] w-[600px] h-[600px]
+bg-blue-500/10 blur-[160px] rounded-full"/>
 
-          <h1 className="text-7xl xl:text-8xl font-black leading-tight mb-8">
+</div>
 
-            {t.hero.title}
+{/* CONTENT */}
 
-            <br/>
+<div className="relative z-10 w-full px-10 grid lg:grid-cols-2 gap-16 items-center">
 
-            <span className="text-blue-500">
-              {t.hero.subtitle}
-            </span>
+{/* TEXT SIDE */}
 
-          </h1>
+<div className={`flex flex-col
+${lang==="ar" ? "items-end text-right" : "items-start text-left"}`}>
 
-          <p className="text-xl text-gray-400 mb-12 max-w-xl">
-            {t.hero.desc}
-          </p>
+<span className="text-yellow-400 text-sm mb-6 tracking-wider">
+{t.hero.badge}
+</span>
 
-          <div className={`flex gap-6 ${lang === "ar" ? "justify-end" : "justify-start"}`}>
+<h1 className="text-5xl xl:text-6xl font-black leading-tight mb-6">
 
-          <a
-  href="#products"
-  className="bg-blue-600 text-white
-  px-14 py-6
-  text-xl font-bold
-  rounded-2xl
-  shadow-lg shadow-blue-500/20
-  hover:bg-blue-500
-  hover:scale-105
-  transition duration-300"
+{t.hero.title}
+
+<br/>
+
+<span className="text-blue-500">
+{t.hero.subtitle}
+</span>
+
+</h1>
+
+<p className="text-lg text-gray-400 mb-10 max-w-xl leading-relaxed">
+{t.hero.desc}
+</p>
+
+<div className={`flex gap-4
+${lang==="ar" ? "justify-end" : "justify-start"}`}>
+
+<a
+href="#products"
+className="bg-blue-600 px-10 py-4 rounded-xl font-bold
+hover:bg-blue-500 transition hover:scale-105"
 >
-  {t.hero.cta1}
+{t.hero.cta1}
 </a>
 
 <a
-  href="#contact"
-  className="border border-white/20
-  px-14 py-6
-  text-xl font-bold
-  rounded-2xl
-  backdrop-blur
-  hover:border-white/40
-  hover:scale-105
-  transition duration-300"
+href="#contact"
+className="border border-white/20 px-10 py-4 rounded-xl
+hover:border-white/40 transition"
 >
-  {t.hero.cta2}
+{t.hero.cta2}
 </a>
 
-          </div>
+</div>
 
-        </div>
+</div>
 
- {/* IMAGE */}
+{/* IMAGE SIDE */}
+
 <div
-  ref={imageRef}
-  className="relative h-[80vh] rounded-[60px] overflow-hidden border border-white/10 transition-transform duration-300"
+ref={imageRef}
+className="relative h-[70vh] rounded-[50px] overflow-hidden border border-white/10 shadow-2xl"
 >
 
-          <Image
-            src="/img/hero.png"
-            fill
-            alt="industrial"
-            className="object-cover"
-            priority
-          />
+<Image
+src="/img/hero.png"
+fill
+alt="industrial"
+className="object-cover"
+priority
+/>
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"/>
-        </div>
+<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"/>
 
-      </div>
+</div>
 
-    </section>
+</div>
+
+</section>
+
   );
 }

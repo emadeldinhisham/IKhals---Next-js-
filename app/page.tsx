@@ -9,6 +9,7 @@ import Footer from "../components/layout/Footer";
 import Industrial from "../components/sections/Industrial/Industrial";
 import Reveal from "@/components/effects/Reveal";
 import { revalidatePath } from "next/cache";
+import ExportMap from "../components/sections/ExportMap";
 
 
 export default function Home() {
@@ -30,7 +31,7 @@ export default function Home() {
        <div className="h-40 bg-gradient-to-b from-transparent to-[#020617]"/>
 
   <Testimonials />
-
+<ExportMap />
  
       <Reveal> <Industrial /></Reveal>
     

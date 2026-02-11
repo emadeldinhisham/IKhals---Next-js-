@@ -94,7 +94,7 @@ export const translations = {
           ]
         },
           {
-          title:"أكياس مغلفة",
+          title:"رولات منسوجة",
           image:"/img/p2.jpg",
           features:[
             "خامة صناعية قوية",
@@ -152,7 +152,30 @@ export const translations = {
       quickLinks:"روابط سريعة",
       contact:"تواصل معنا",
       rights:"جميع الحقوق محفوظة © الإخلاص للصناعات البلاستيكية"
+    },
+    capabilities: {
+  title: "قدراتنا الصناعية",
+
+  items: [
+    {
+      title:"معايير جودة صارمة",
+      desc:"التزام كامل بشهادات الجودة الدولية."
+    },
+    {
+      title:"تصدير عالمي",
+      desc:"نخدم عملاء في عدة دول حول العالم."
+    },
+    {
+      title:"قدرة إنتاج عالية",
+      desc:"طاقة إنتاجية ضخمة لتلبية الطلبات الكبيرة."
+    },
+    {
+      title:"تقنيات تصنيع متقدمة",
+      desc:"استخدام أحدث خطوط الإنتاج الأوروبية."
     }
+  ]
+},
+
 
   },
 
@@ -233,7 +256,7 @@ export const translations = {
           ]
         },
            {
-          title:"BOPP Bags",
+          title:" Woven Polypropylene Rolls",
           image:"/img/p1.jpg",
           features:[
             "Double-Sided Printing",
@@ -280,7 +303,30 @@ export const translations = {
       quickLinks:"Quick Links",
       contact:"Contact Us",
       rights:"All Rights Reserved © Al Ikhlas Plastic Industries"
+    },
+    capabilities: {
+  title: "قدراتنا الصناعية",
+
+  items: [
+    {
+      title:"معايير جودة صارمة",
+      desc:"التزام كامل بشهادات الجودة الدولية."
+    },
+    {
+      title:"تصدير عالمي",
+      desc:"نخدم عملاء في عدة دول حول العالم."
+    },
+    {
+      title:"قدرة إنتاج عالية",
+      desc:"طاقة إنتاجية ضخمة لتلبية الطلبات الكبيرة."
+    },
+    {
+      title:"تقنيات تصنيع متقدمة",
+      desc:"استخدام أحدث خطوط الإنتاج الأوروبية."
     }
+  ]
+},
+
 
   }
 

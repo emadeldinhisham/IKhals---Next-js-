@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { translations } from "@/data/translations";
 
 const LanguageContext = createContext(null);
@@ -9,7 +9,15 @@ export function LanguageProvider({ children }) {
 
   const [lang, setLang] = useState("ar");
 
-  const t = translations[lang]; // 🔥 هذا أهم سطر
+  // 😈 ULTRA RTL AUTO
+  useEffect(()=>{
+
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+  },[lang]);
+
+  const t = translations[lang];
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>
