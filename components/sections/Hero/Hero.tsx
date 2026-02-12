@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import IndustrialWave from "@/components/effects/IndustrialWave";
 
 export default function Hero() {
 
@@ -120,6 +121,15 @@ priority
 </div>
 
 </div>
+<section className="relative overflow-hidden">
+
+<IndustrialWave />
+
+<div className="relative z-10">
+   ...
+</div>
+
+</section>
 
 </section>
 
