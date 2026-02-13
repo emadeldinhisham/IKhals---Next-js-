@@ -10,7 +10,7 @@ import Industrial from "../components/sections/Industrial/Industrial";
 import Reveal from "@/components/effects/Reveal";
 import { revalidatePath } from "next/cache";
 import ExportMap from "../components/sections/ExportMap";
-
+import Services from "@/components/sections/Services";
 
 export default function Home() {
   return (
@@ -31,12 +31,14 @@ export default function Home() {
        <div className="h-40 bg-gradient-to-b from-transparent to-[#020617]"/>
 
   <Testimonials />
+  <Reveal><Services /></Reveal>
 <ExportMap />
  
       <Reveal> <Industrial /></Reveal>
     
   
       <Reveal><Certificates /></Reveal>
+      
       <Footer />
       
     </>

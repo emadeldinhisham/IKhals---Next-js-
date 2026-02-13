@@ -1,68 +1,87 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import IndustrialWave from "@/components/effects/IndustrialWave";
+import CinematicSection from "@/components/effects/CinematicSection";
+import { useEffect, useRef } from "react";
 
 export default function Hero() {
 
-  const { lang, t } = useLanguage();
-  const imageRef = useRef<HTMLDivElement>(null);
+const { lang, t } = useLanguage();
 
-  useEffect(() => {
+const imageRef = useRef<HTMLDivElement>(null);
+const glowRef = useRef<HTMLDivElement>(null);
 
-    const handleScroll = () => {
+useEffect(()=>{
 
-      if (!imageRef.current) return;
+ const moveDepth = (e:MouseEvent)=>{
 
-      const scrollY = window.scrollY;
+   const x = (e.clientX / window.innerWidth - 0.5);
+   const y = (e.clientY / window.innerHeight - 0.5);
 
-      imageRef.current.style.transform =
-        `translateY(${scrollY * 0.08}px) scale(1.02)`;
+   // IMAGE 3D DEPTH
+   if(imageRef.current){
 
-    };
+     imageRef.current.style.transform =
+       `rotateY(${x*10}deg) rotateX(${y*-10}deg) scale(1.03)`;
 
-    window.addEventListener("scroll", handleScroll);
+   }
 
-    return () => window.removeEventListener("scroll", handleScroll);
+   // GLOW MOVE
+   if(glowRef.current){
 
-  }, []);
+     glowRef.current.style.transform =
+       `translate(${x*120}px, ${y*120}px)`;
 
-  return (
+   }
 
-<section className="min-h-screen flex items-center relative overflow-hidden bg-[#020617] text-white">
+ };
 
-{/* CINEMATIC BACKGROUND */}
+ window.addEventListener("mousemove", moveDepth);
+
+ return ()=> window.removeEventListener("mousemove", moveDepth);
+
+},[]);
+
+
+return (
+
+<CinematicSection>
+
+<section className="relative min-h-screen flex items-center overflow-hidden bg-[#020617] text-white [perspective:1200px]">
+
+{/* BACKGROUND */}
 
 <div className="absolute inset-0">
 
-<div className="absolute inset-0 opacity-20
-bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]
-bg-[size:80px_80px]" />
+<div className="absolute inset-0 opacity-10
+bg-[linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)]
+bg-[size:70px_70px]" />
 
-<div className="absolute top-[-200px] left-[10%] w-[600px] h-[600px]
-bg-yellow-500/10 blur-[160px] rounded-full"/>
-
-<div className="absolute bottom-[-200px] right-[10%] w-[600px] h-[600px]
-bg-blue-500/10 blur-[160px] rounded-full"/>
+<div
+ref={glowRef}
+className="absolute w-[700px] h-[700px]
+bg-gradient-to-r from-blue-500/20 to-yellow-500/20
+blur-[200px] rounded-full transition-transform duration-300"
+/>
 
 </div>
+
 
 {/* CONTENT */}
 
 <div className="relative z-10 w-full px-10 grid lg:grid-cols-2 gap-16 items-center">
 
-{/* TEXT SIDE */}
+{/* TEXT */}
 
-<div className={`flex flex-col
+<div className={`flex flex-col gap-6
 ${lang==="ar" ? "items-end text-right" : "items-start text-left"}`}>
 
-<span className="text-yellow-400 text-sm mb-6 tracking-wider">
+<span className="text-yellow-400 text-sm tracking-widest">
 {t.hero.badge}
 </span>
 
-<h1 className="text-5xl xl:text-6xl font-black leading-tight mb-6">
+<h1 className="text-5xl xl:text-6xl font-black leading-tight">
 
 {t.hero.title}
 
@@ -74,7 +93,7 @@ ${lang==="ar" ? "items-end text-right" : "items-start text-left"}`}>
 
 </h1>
 
-<p className="text-lg text-gray-400 mb-10 max-w-xl leading-relaxed">
+<p className="text-lg text-gray-400 max-w-xl">
 {t.hero.desc}
 </p>
 
@@ -92,7 +111,7 @@ hover:bg-blue-500 transition hover:scale-105"
 <a
 href="#contact"
 className="border border-white/20 px-10 py-4 rounded-xl
-hover:border-white/40 transition"
+hover:border-white/40 transition hover:scale-105"
 >
 {t.hero.cta2}
 </a>
@@ -101,11 +120,14 @@ hover:border-white/40 transition"
 
 </div>
 
-{/* IMAGE SIDE */}
+
+{/* IMAGE DEPTH */}
 
 <div
 ref={imageRef}
-className="relative h-[70vh] rounded-[50px] overflow-hidden border border-white/10 shadow-2xl"
+className="relative h-[70vh] rounded-[50px]
+overflow-hidden border border-white/10 shadow-2xl
+transition-transform duration-200"
 >
 
 <Image
@@ -121,17 +143,10 @@ priority
 </div>
 
 </div>
-<section className="relative overflow-hidden">
-
-<IndustrialWave />
-
-<div className="relative z-10">
-   ...
-</div>
 
 </section>
 
-</section>
+</CinematicSection>
 
-  );
+);
 }

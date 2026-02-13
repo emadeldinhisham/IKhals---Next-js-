@@ -1,64 +1,132 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { useLanguage } from "@/components/providers/LanguageProvider";
+import IndustrialWave from "@/components/effects/IndustrialWave";
 
-export default function IndustrialWave() {
+export default function Hero() {
 
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+const { lang, t } = useLanguage();
+const imageRef = useRef<HTMLDivElement>(null);
 
-  useEffect(()=>{
+useEffect(()=>{
 
-    const canvas = canvasRef.current;
-    if(!canvas) return;
+const handleScroll = () => {
 
-    const ctx = canvas.getContext("2d");
+if(!imageRef.current) return;
 
-    let w = canvas.width = window.innerWidth;
-    let h = canvas.height = window.innerHeight;
+const y = window.scrollY;
 
-    window.addEventListener("resize",()=>{
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    });
+imageRef.current.style.transform =
+`translateY(${y*0.05}px) scale(1.04)`;
 
-    let t = 0;
+};
 
-    function draw(){
+window.addEventListener("scroll",handleScroll);
 
-      ctx.clearRect(0,0,w,h);
+return ()=> window.removeEventListener("scroll",handleScroll);
 
-      for(let y=0;y<20;y++){
+},[]);
 
-        ctx.beginPath();
+return(
 
-        for(let x=0;x<w;x++){
+<section className="relative min-h-screen flex items-center overflow-hidden bg-[#020617] text-white">
 
-          const wave =
-            Math.sin(x*0.01 + t + y*0.4)*20;
+{/* ================= CINEMATIC BACKGROUND ================= */}
 
-          ctx.lineTo(x, h/2 + wave + y*25);
-        }
+<div className="absolute inset-0">
 
-        ctx.strokeStyle="rgba(150,80,255,0.15)";
-        ctx.lineWidth=1;
-        ctx.stroke();
-      }
+{/* INDUSTRIAL WAVE */}
+<IndustrialWave />
 
-      t += 0.02;
-      requestAnimationFrame(draw);
-    }
+{/* GRID TEXTURE */}
+<div className="absolute inset-0 opacity-10
+bg-[linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)]
+bg-[size:70px_70px]" />
 
-    draw();
+{/* LIGHT GLOW */}
+<div className="absolute top-[-300px] left-[5%] w-[700px] h-[700px]
+bg-yellow-500/10 blur-[200px] rounded-full"/>
 
-  },[]);
+<div className="absolute bottom-[-300px] right-[5%] w-[700px] h-[700px]
+bg-blue-500/10 blur-[200px] rounded-full"/>
 
-  return (
+</div>
 
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-    />
+{/* ================= CONTENT ================= */}
 
-  );
+<div className="relative z-10 w-full px-10 grid lg:grid-cols-2 gap-16 items-center">
+
+{/* TEXT SIDE */}
+
+<div className={`flex flex-col gap-6
+${lang==="ar" ? "items-end text-right" : "items-start text-left"}`}>
+
+<span className="text-yellow-400 text-sm tracking-widest">
+{t.hero.badge}
+</span>
+
+<h1 className="text-5xl xl:text-6xl font-black leading-tight">
+
+{t.hero.title}
+
+<br/>
+
+<span className="text-blue-500">
+{t.hero.subtitle}
+</span>
+
+</h1>
+
+<p className="text-lg text-gray-400 max-w-xl leading-relaxed">
+{t.hero.desc}
+</p>
+
+<div className={`flex gap-4
+${lang==="ar" ? "justify-end" : "justify-start"}`}>
+
+<a
+href="#products"
+className="bg-blue-600 px-10 py-4 rounded-xl font-bold
+hover:bg-blue-500 transition hover:scale-105 shadow-lg shadow-blue-500/20">
+{t.hero.cta1}
+</a>
+
+<a
+href="#contact"
+className="border border-white/20 px-10 py-4 rounded-xl
+hover:border-white/40 transition">
+{t.hero.cta2}
+</a>
+
+</div>
+
+</div>
+
+{/* IMAGE SIDE */}
+
+<div
+ref={imageRef}
+className="relative h-[70vh] rounded-[50px] overflow-hidden
+border border-white/10 shadow-2xl">
+
+<Image
+src="/img/hero.png"
+fill
+alt="industrial"
+className="object-cover"
+priority
+/>
+
+<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"/>
+
+</div>
+
+</div>
+
+</section>
+
+);
 
 }
