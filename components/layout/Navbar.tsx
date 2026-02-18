@@ -41,7 +41,7 @@ ${scrolled
 
 <div className="font-black text-lg text-white tracking-wide">
 
-{lang==="ar" ? "الإخلاص للصناعات البلاستيكية" : " Al ikhlas For Plastic Industries"}
+{lang==="ar" ? "شركة الإخلاص للصناعات البلاستيكية" : " Al ikhlas For Plastic Industries"}
 
 </div>
 

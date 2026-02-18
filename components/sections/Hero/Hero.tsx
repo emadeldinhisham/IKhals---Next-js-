@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import CinematicSection from "@/components/effects/CinematicSection";
 import { useEffect, useRef } from "react";
+import { Award, Target, Star } from "lucide-react";
 
 export default function Hero() {
 
@@ -117,31 +118,137 @@ hover:border-white/40 transition hover:scale-105"
 </a>
 
 </div>
+{/* ULTRA HERO INDUSTRIAL CARDS */}
+
+<div className="grid md:grid-cols-3 gap-6 mt-14 max-w-3xl w-full">
+
+{/* CARD */}
+
+<div className="group relative p-[1px] rounded-2xl
+bg-gradient-to-r from-blue-500/30 to-yellow-400/30
+transition duration-500 hover:scale-105">
+
+<div className="relative flex items-center gap-4
+bg-[#020617]/90 backdrop-blur-xl
+p-6 rounded-2xl border border-white/10">
+
+<div className="p-3 rounded-xl bg-yellow-400/10">
+<Award size={24} className="text-yellow-400"/>
+</div>
+
+<p className="font-semibold text-sm">
+جودة في التصنيع والدفاع
+</p>
+
+</div>
+
+</div>
+
+{/* CARD */}
+
+<div className="group relative p-[1px] rounded-2xl
+bg-gradient-to-r from-pink-500/30 to-blue-400/30
+transition duration-500 hover:scale-105">
+
+<div className="relative flex items-center gap-4
+bg-[#020617]/90 backdrop-blur-xl
+p-6 rounded-2xl border border-white/10">
+
+<div className="p-3 rounded-xl bg-pink-400/10">
+<Target size={24} className="text-pink-400"/>
+</div>
+
+<p className="font-semibold text-sm">
+جودة الإنتاج ومتانته هدفنا
+</p>
+
+</div>
+
+</div>
+
+{/* CARD */}
+
+<div className="group relative p-[1px] rounded-2xl
+bg-gradient-to-r from-blue-400/30 to-cyan-400/30
+transition duration-500 hover:scale-105">
+
+<div className="relative flex items-center gap-4
+bg-[#020617]/90 backdrop-blur-xl
+p-6 rounded-2xl border border-white/10">
+
+<div className="p-3 rounded-xl bg-blue-400/10">
+<Star size={24} className="text-blue-400"/>
+</div>
+
+<p className="font-semibold text-sm">
+100% رضا العملاء
+</p>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
 
 {/* IMAGE DEPTH */}
 
-<div
-ref={imageRef}
-className="relative h-[70vh] rounded-[50px]
-overflow-hidden border border-white/10 shadow-2xl
-transition-transform duration-200"
->
+<div className="relative h-[70vh] rounded-[50px] overflow-hidden border border-white/10">
+
+{/* IMAGE */}
 
 <Image
-src="/img/hero.png"
-fill
-alt="industrial"
-className="object-cover"
-priority
+  src="/img/hero.png"
+  fill
+  alt="industrial"
+  className="object-cover"
+  priority
 />
 
 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"/>
 
+
+{/* ULTRA LUXURY EXPERIENCE CIRCLE */}
+
+{/* ULTRA ATTACHED EXPERIENCE CIRCLE */}
+
+{/* ULTRA PREMIUM INDUSTRIAL CIRCLE */}
+
+
+
+
+
 </div>
 
+<div className="
+absolute
+bottom-[-70px]
+left-[-70px]
+w-[240px]
+h-[240px]
+rounded-full
+flex flex-col items-center justify-center
+text-center
+border-[10px] border-[#020617]
+bg-gradient-to-br
+from-[#0B1220]
+via-[#1E293B]
+to-[#C8A951]
+shadow-[0_40px_120px_rgba(0,0,0,0.6)]
+backdrop-blur-xl
+">
+
+<h3 className="text-6xl font-black text-[#FDE68A]">
+13
+</h3>
+
+<p className="text-sm font-semibold text-white mt-2">
+Years of<br/>Experience
+</p>
+
+</div>
 </div>
 
 </section>
