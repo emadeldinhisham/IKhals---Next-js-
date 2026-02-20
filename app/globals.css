@@ -55,3 +55,29 @@ background-size:200% 200%;
 animation: gradientMove 6s ease infinite;
 
 }
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+
+@keyframes slideUp{
+from{transform:translateY(80px);opacity:0}
+to{transform:translateY(0);opacity:1}
+}
+
+@keyframes fadeUp{
+from{transform:translateY(20px);opacity:0}
+to{transform:translateY(0);opacity:1}
+}
+
+@keyframes stagger{
+to{opacity:1;transform:none}
+}
+
+.animate-fadeIn{animation:fadeIn .5s ease forwards}
+.animate-slideUp{animation:slideUp .7s ease forwards}
+.animate-fadeUp{animation:fadeUp .6s ease forwards}
+.animate-stagger{
+animation:fadeUp .5s ease forwards;
+transform:translateY(10px);
+}

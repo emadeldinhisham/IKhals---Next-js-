@@ -12,23 +12,7 @@ export const translations = {
       cta1: "اكتشف منتجاتنا",
       cta2: "تواصل معنا"
     },
-
- 
-
-  features: [
-    {
-      title: "جودة في التصنيع"
-    },
-    {
-      title: "جودة الإنتاج ومتانته هدفنا"
-    },
-    {
-      title: "100% نسبة الرضا من العملاء"
-    }
-  ]
-
-},
-
+    
     
 
     /* ================= NAVBAR ================= */
@@ -74,72 +58,76 @@ export const translations = {
 
     /* ================= PRODUCTS ================= */
 
-    products: {
+products:{
+  title:"منتجاتنا",
+  details:"التفاصيل",
 
-      title:"منتجاتنا",
-      details:"التفاصيل",
+  items:[
 
-      featuresTitle:"المميزات",
-      specsTitle:"المواصفات",
+    {
+      id:"woven-rolls",
+      title:"رولات منسوجة",
+      image:"/img/rolls.jpg",
+      features:[
+        "قوة تحمل عالية",
+        "مقاومة للرطوبة",
+        "جودة صناعية ممتازة"
+      ],
+      specs:[
+        "عرض متعدد",
+        "سماكات مختلفة"
+      ]
+    },
 
-      items:[
+    {
+      id:"woven-bags",
+      title:"أكياس منسوجة",
+      image:"/img/woven.jpg",
+
+      children:[
 
         {
+          id:"bopp",
           title:"أكياس BOPP",
-          image:"/img/p1.jpg",
+          image:"/img/bopp.jpg",
           features:[
-            "طباعة مزدوجة حتى 8 ألوان",
-            "طبقة BOPP اختيارية",
-            "تحمل عالي"
+            "طباعة عالية الجودة",
+            "طبقة BOPP"
           ],
           specs:[
-            "العرض: 35cm - 80cm",
-            "الطول: 40cm - 125cm"
+            "حتى 8 ألوان"
           ]
         },
 
         {
-          title:"أكياس منسوجة",
-          image:"/img/p2.jpg",
+          id:"printed",
+          title:"أكياس مطبوعة",
+          image:"/img/printed.jpg",
           features:[
-            "خامة صناعية قوية",
-            "تحمل أوزان عالية",
-            "حماية UV"
+            "تصميم مخصص"
           ],
           specs:[
-            "العرض: 50cm - 100cm",
-            "الطول: حسب الطلب"
+            "طباعة احترافية"
           ]
         },
-          {
-          title:"رولات منسوجة",
-          image:"/img/p2.jpg",
+
+        {
+          id:"laminated",
+          title:"أكياس Laminated",
+          image:"/img/laminated.jpg",
           features:[
-            "خامة صناعية قوية",
-            "تحمل أوزان عالية",
-            "حماية UV"
+            "مقاومة للماء"
           ],
           specs:[
-            "العرض: 50cm - 100cm",
-            "الطول: حسب الطلب"
-          ]
-        },
-          {
-          title:"أكياس مطبوعة ",
-          image:"/img/p2.jpg",
-          features:[
-            "خامة صناعية قوية",
-            "تحمل أوزان عالية",
-            "حماية UV"
-          ],
-          specs:[
-            "العرض: 50cm - 100cm",
-            "الطول: حسب الطلب"
+            "طبقة حماية"
           ]
         }
 
       ]
-    },
+    }
+
+  ]
+},
 
     /* ================= TESTIMONIALS ================= */
 
@@ -275,69 +263,76 @@ text:"بفضل خبرتنا الصناعية وشراكاتنا العالمية
       sectors:"Industries Served"
     },
 
-    products:{
-      title:"Our Products",
-      details:"Details",
-      featuresTitle:"Features",
-      specsTitle:"Specification",
-      items:[
-        {
-          title:"BOPP Bags",
-          image:"/img/p1.jpg",
-          features:[
-            "Double-Sided Printing",
-            "Optional BOPP Layer",
-            "High Durability"
-          ],
-          specs:[
-            "Width: 35cm - 80cm",
-            "Length: 40cm - 125cm"
-          ],
-          
-        },
-           {
-          title:"BOPP Bags",
-          image:"/img/p1.jpg",
-          features:[
-            "Double-Sided Printing",
-            "Optional BOPP Layer",
-            "High Durability"
-          ],
-          specs:[
-            "Width: 35cm - 80cm",
-            "Length: 40cm - 125cm"
-          ]
-        },
-           {
-          title:" Woven Polypropylene Rolls",
-          image:"/img/p1.jpg",
-          features:[
-            "Double-Sided Printing",
-            "Optional BOPP Layer",
-            "High Durability"
-          ],
-          specs:[
-            "Width: 35cm - 80cm",
-            "Length: 40cm - 125cm"
-          ]
-        },
-           {
-          title:"BOPP Bags",
-          image:"/img/p1.jpg",
-          features:[
-            "Double-Sided Printing",
-            "Optional BOPP Layer",
-            "High Durability"
-          ],
-          specs:[
-            "Width: 35cm - 80cm",
-            "Length: 40cm - 125cm"
-          ]
-        }
-        
+products:{
+  title:"Our Products",
+  details:"Details",
+
+  items:[
+
+    {
+      id:"woven-rolls",
+      title:"Woven Polypropylene Rolls",
+      image:"/img/rolls.jpg",
+      features:[
+        "High durability",
+        "Moisture resistant",
+        "Industrial quality"
+      ],
+      specs:[
+        "Multiple widths",
+        "Various thickness"
       ]
     },
-    
+
+    {
+      id:"woven-bags",
+      title:"Woven Bags",
+      image:"/img/woven.jpg",
+
+      children:[
+
+        {
+          id:"bopp",
+          title:"BOPP Bags",
+          image:"/img/bopp.jpg",
+          features:[
+            "High quality printing",
+            "BOPP layer"
+          ],
+          specs:[
+            "Up to 8 colors"
+          ]
+        },
+
+        {
+          id:"printed",
+          title:"Printed Bags",
+          image:"/img/printed.jpg",
+          features:[
+            "Custom design"
+          ],
+          specs:[
+            "Professional printing"
+          ]
+        },
+
+        {
+          id:"laminated",
+          title:"Laminated Bags",
+          image:"/img/laminated.jpg",
+          features:[
+            "Water resistant"
+          ],
+          specs:[
+            "Protection layer"
+          ]
+        }
+
+      ]
+    }
+
+  ]
+},
 
     testimonials:{
       badge:"Testimonials",

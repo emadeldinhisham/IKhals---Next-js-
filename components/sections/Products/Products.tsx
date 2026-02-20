@@ -2,183 +2,236 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Magnetic from "@/components/effects/Magnetic";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
-
 export default function Products() {
-const { t } = useLanguage();
 
-const products = t?.products?.items || [];
+const { t, lang } = useLanguage();
 
-// 🔥 ULTRA SAFE DATA
+const products = t.products.items;
 
-const safeProducts = products?.filter(p => p.image && p.title) || [];
+const [active,setActive] = useState(products[0]);
+const [selected,setSelected] = useState(null);
 
+return (
 
+<section id="products" className="py-40 text-white">
 
-  const [selected,setSelected] = useState(null);
+<div className="max-w-7xl mx-auto px-6">
 
-  return (
-
-    <section id="products" className="py-40 text-white text-center">
-<h2 className="text-5xl font-black mb-20">
-  {t.products.title}
+<h2 className="text-center text-5xl font-black mb-20">
+{t.products.title}
 </h2>
 
+{/* 🔥 INDUSTRIAL NAV TABS */}
 
-      <div className="grid md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div className="flex justify-center gap-10 mb-20">
 
-{safeProducts.map((p,i)=>(
-<div
-  key={i}
-  className="group relative rounded-3xl overflow-hidden
-  border border-white/10
-  transition duration-500 hover:border-blue-400/40"
->
-
-  {/* IMAGE */}
-
-  <div className="relative h-[420px]">
-
-    <Image
-src={p.image || "/img/fallback.jpg"}
-      fill
-      alt={p.title}
-      className="object-cover transition duration-700 group-hover:scale-110"
-    />
-
-    {/* DARK OVERLAY */}
-
-    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80" />
-
-    {/* HOVER CONTENT */}
-
-    <div className="absolute inset-0 flex flex-col justify-end p-8
-      opacity-0 group-hover:opacity-100
-      transition duration-500">
-
-      <h3 className="text-2xl font-bold mb-3 text-right">
-        {p.title}
-      </h3>
-
-     <Magnetic>
+{products.map((p,i)=>(
 
 <button
-  onClick={()=>setSelected(p)}
-  className="self-end bg-blue-600 px-6 py-3 rounded-xl
-  font-bold hover:bg-blue-500 transition"
+key={i}
+onClick={()=>setActive(p)}
+className={`text-lg font-bold transition
+${active.title===p.title
+? "text-blue-400 border-b-2 border-blue-400"
+: "text-gray-400 hover:text-white"}`}
 >
+
+{p.title}
+
+</button>
+
+))}
+
+</div>
+
+
+{/* 🔥 ACTIVE CONTENT */}
+
+<div className="grid md:grid-cols-3 gap-10">
+
+{active.children
+? active.children.map((c,i)=>(
+
+<div
+key={i}
+className="group border border-white/10 rounded-3xl overflow-hidden
+hover:border-blue-400/40 transition duration-500"
+>
+
+<div className="relative h-[350px]">
+
+<Image
+src={c.image}
+fill
+alt={c.title}
+className="object-cover transition duration-700 group-hover:scale-110"
+/>
+
+</div>
+
+<div className="p-6">
+
+<h3 className="text-xl font-bold mb-4">
+{c.title}
+</h3>
+
+<button
+onClick={()=>setSelected(c)}
+className="bg-blue-600 px-6 py-2 rounded-xl font-bold hover:bg-blue-500"
+>
+
 {t.products.details}
 
 </button>
 
-</Magnetic>
-
-
-    </div>
-
-  </div>
+</div>
 
 </div>
 
-          
+))
 
-        ))}
-
-      </div>
-
-      {/* POPUP */}
-
-     {selected && (
-
-<div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-10">
-
-<div className="bg-[#0b1220] border border-white/10 rounded-3xl
-max-w-6xl w-full grid md:grid-cols-2 overflow-hidden">
-
-{/* IMAGE SIDE */}
+: (
 
 <div
-  className="relative min-h-[500px] overflow-hidden"
-  onMouseMove={(e)=>{
-
-    const img = e.currentTarget.querySelector("img");
-
-    const rect = e.currentTarget.getBoundingClientRect();
-
-    const x = (e.clientX - rect.left - rect.width/2) / 30;
-    const y = (e.clientY - rect.top - rect.height/2) / 30;
-
-    img.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
-
-  }}
-
-  onMouseLeave={(e)=>{
-
-    const img = e.currentTarget.querySelector("img");
-    img.style.transform = "scale(1) translate(0px,0px)";
-
-  }}
+className="border border-white/10 rounded-3xl overflow-hidden"
 >
 
+<div className="relative h-[350px]">
 
 <Image
-src={"/img/logo2.jpg"}
+src={active.image}
 fill
-alt={selected.title}
+alt={active.title}
 className="object-cover"
 />
 
-<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"/>
+</div>
+
+<div className="p-6">
+
+<h3 className="text-xl font-bold">
+{active.title}
+</h3>
+
+<button
+onClick={()=>setSelected(active)}
+className="bg-blue-600 px-6 py-2 rounded-xl mt-4"
+>
+
+{t.products.details}
+
+</button>
+
+</div>
+
+</div>
+
+)}
+
+</div>
 
 </div>
 
 
-{/* CONTENT SIDE */}
+{/* 🔥 POPUP */}
 
-<div className="p-12 text-left text-white relative">
+{selected && (
+
+<div className="fixed inset-0 z-[999] bg-[#020617]/95 backdrop-blur-xl animate-fadeIn">
+
+{/* CLOSE */}
 
 <button
 onClick={()=>setSelected(null)}
-className="absolute top-6 right-6 text-xl"
+className="absolute top-8 right-10 text-3xl z-50 hover:scale-110 transition"
 >
 ✕
 </button>
 
-<h2 className="text-4xl font-bold mb-8">
+<div className="h-full flex items-center">
+
+<div className="max-w-7xl mx-auto px-10 w-full">
+
+<div
+className={`grid md:grid-cols-2 gap-20 items-center
+transition-all duration-700 animate-slideUp
+${lang==="ar" ? "" : "md:flex-row-reverse"}`}
+>
+
+{/* IMAGE */}
+
+<div className="relative h-[600px] rounded-[40px] overflow-hidden
+border border-white/10 shadow-2xl">
+
+<Image
+src={selected.image}
+fill
+alt={selected.title}
+className="object-cover transition duration-[1200ms] scale-105"
+/>
+
+<div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"/>
+
+</div>
+
+
+{/* DETAILS */}
+
+<div className={`${lang==="ar" ? "text-right" : "text-left"}`}>
+
+<h2 className="text-5xl font-black mb-10 animate-fadeUp">
 {selected.title}
 </h2>
 
-
-{/* FEATURES */}
-
-<h3 className="text-yellow-400 text-xl mb-4">
+<h3 className="text-yellow-400 text-xl mb-6">
 ✨ Features
 </h3>
 
-<ul className="space-y-2 mb-8">
+<ul className="space-y-4 mb-12">
 
 {selected.features?.map((f,i)=>(
-<li key={i}>✔ {f}</li>
+
+<li
+key={i}
+className="opacity-0 animate-stagger"
+style={{animationDelay:`${i*0.08}s`}}
+>
+
+✔ {f}
+
+</li>
+
 ))}
 
 </ul>
 
-
-{/* SPECS */}
-
-<h3 className="text-yellow-400 text-xl mb-4">
-📐 Specification
+<h3 className="text-yellow-400 text-xl mb-6">
+📐 Specifications
 </h3>
 
-<ul className="space-y-2">
+<ul className="space-y-4">
 
 {selected.specs?.map((s,i)=>(
-<li key={i}>• {s}</li>
+
+<li
+key={i}
+className="opacity-0 animate-stagger"
+style={{animationDelay:`${i*0.08}s`}}
+>
+
+• {s}
+
+</li>
+
 ))}
 
 </ul>
+
+</div>
+
+</div>
 
 </div>
 
@@ -188,7 +241,7 @@ className="absolute top-6 right-6 text-xl"
 
 )}
 
+</section>
 
-    </section>
-  );
+);
 }

@@ -2,7 +2,6 @@ import Navbar from "../components/layout/Navbar";
 import Hero from "../components/sections/Hero/Hero";
 import Impact from "../components/sections/Impact";
 import About from "../components/sections/About";
-import Testimonials from "../components/sections/Testimonials";
 import Products from "../components/sections/Products/Products";
 import Certificates from "../components/sections/Certificates/Certificates";
 import Footer from "../components/layout/Footer";
@@ -30,7 +29,6 @@ export default function Home() {
   <Products />
        <div className="h-40 bg-gradient-to-b from-transparent to-[#020617]"/>
 
-  <Testimonials />
   <Reveal><Services /></Reveal>
 <ExportMap />
  
