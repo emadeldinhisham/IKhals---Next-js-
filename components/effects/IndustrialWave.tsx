@@ -24,33 +24,32 @@ imageRef.current.style.transform =
 };
 
 window.addEventListener("scroll",handleScroll);
-
 return ()=> window.removeEventListener("scroll",handleScroll);
 
 },[]);
 
 return(
 
-<section className="relative min-h-screen flex items-center overflow-hidden bg-[#020617] text-white">
+<section className="relative min-h-screen flex items-center overflow-hidden bg-[#f6f8fb] text-slate-900">
 
-{/* ================= CINEMATIC BACKGROUND ================= */}
+{/* ================= BACKGROUND ================= */}
 
 <div className="absolute inset-0">
 
 {/* INDUSTRIAL WAVE */}
 <IndustrialWave />
 
-{/* GRID TEXTURE */}
-<div className="absolute inset-0 opacity-10
-bg-[linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)]
+{/* LIGHT GRID */}
+<div className="absolute inset-0 opacity-30
+bg-[linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)]
 bg-[size:70px_70px]" />
 
 {/* LIGHT GLOW */}
 <div className="absolute top-[-300px] left-[5%] w-[700px] h-[700px]
-bg-yellow-500/10 blur-[200px] rounded-full"/>
+bg-yellow-400/20 blur-[200px] rounded-full"/>
 
 <div className="absolute bottom-[-300px] right-[5%] w-[700px] h-[700px]
-bg-blue-500/10 blur-[200px] rounded-full"/>
+bg-blue-400/20 blur-[200px] rounded-full"/>
 
 </div>
 
@@ -63,7 +62,7 @@ bg-blue-500/10 blur-[200px] rounded-full"/>
 <div className={`flex flex-col gap-6
 ${lang==="ar" ? "items-end text-right" : "items-start text-left"}`}>
 
-<span className="text-yellow-400 text-sm tracking-widest">
+<span className="text-yellow-500 text-sm tracking-widest">
 {t.hero.badge}
 </span>
 
@@ -73,13 +72,13 @@ ${lang==="ar" ? "items-end text-right" : "items-start text-left"}`}>
 
 <br/>
 
-<span className="text-blue-500">
+<span className="text-blue-600">
 {t.hero.subtitle}
 </span>
 
 </h1>
 
-<p className="text-lg text-gray-400 max-w-xl leading-relaxed">
+<p className="text-lg text-slate-600 max-w-xl leading-relaxed">
 {t.hero.desc}
 </p>
 
@@ -88,15 +87,15 @@ ${lang==="ar" ? "justify-end" : "justify-start"}`}>
 
 <a
 href="#products"
-className="bg-blue-600 px-10 py-4 rounded-xl font-bold
+className="bg-blue-600 text-white px-10 py-4 rounded-xl font-bold
 hover:bg-blue-500 transition hover:scale-105 shadow-lg shadow-blue-500/20">
 {t.hero.cta1}
 </a>
 
 <a
 href="#contact"
-className="border border-white/20 px-10 py-4 rounded-xl
-hover:border-white/40 transition">
+className="border border-gray-300 px-10 py-4 rounded-xl
+hover:border-gray-500 transition">
 {t.hero.cta2}
 </a>
 
@@ -109,7 +108,7 @@ hover:border-white/40 transition">
 <div
 ref={imageRef}
 className="relative h-[70vh] rounded-[50px] overflow-hidden
-border border-white/10 shadow-2xl">
+border border-gray-200 shadow-xl">
 
 <Image
 src="/img/hero.png"
@@ -119,7 +118,7 @@ className="object-cover"
 priority
 />
 
-<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"/>
+<div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent"/>
 
 </div>
 
@@ -128,5 +127,4 @@ priority
 </section>
 
 );
-
 }

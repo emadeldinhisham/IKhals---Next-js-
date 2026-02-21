@@ -15,7 +15,7 @@ const [selected,setSelected] = useState(null);
 
 return (
 
-<section id="products" className="py-40 text-white">
+<section id="products" className="py-40 bg-[#f6f8fb] text-slate-800">
 
 <div className="max-w-7xl mx-auto px-6">
 
@@ -23,9 +23,9 @@ return (
 {t.products.title}
 </h2>
 
-{/* 🔥 INDUSTRIAL NAV TABS */}
+{/* NAV TABS */}
 
-<div className="flex justify-center gap-10 mb-20">
+<div className="flex justify-center gap-10 mb-20 flex-wrap">
 
 {products.map((p,i)=>(
 
@@ -34,8 +34,8 @@ key={i}
 onClick={()=>setActive(p)}
 className={`text-lg font-bold transition
 ${active.title===p.title
-? "text-blue-400 border-b-2 border-blue-400"
-: "text-gray-400 hover:text-white"}`}
+? "text-blue-500 border-b-2 border-blue-500"
+: "text-slate-500 hover:text-slate-900"}`}
 >
 
 {p.title}
@@ -47,7 +47,7 @@ ${active.title===p.title
 </div>
 
 
-{/* 🔥 ACTIVE CONTENT */}
+{/* ACTIVE CONTENT */}
 
 <div className="grid md:grid-cols-3 gap-10">
 
@@ -56,8 +56,8 @@ ${active.title===p.title
 
 <div
 key={i}
-className="group border border-white/10 rounded-3xl overflow-hidden
-hover:border-blue-400/40 transition duration-500"
+className="group border border-gray-200 bg-white rounded-3xl overflow-hidden shadow-xl
+hover:border-blue-400 transition duration-500"
 >
 
 <div className="relative h-[350px]">
@@ -79,7 +79,7 @@ className="object-cover transition duration-700 group-hover:scale-110"
 
 <button
 onClick={()=>setSelected(c)}
-className="bg-blue-600 px-6 py-2 rounded-xl font-bold hover:bg-blue-500"
+className="bg-blue-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-blue-500"
 >
 
 {t.products.details}
@@ -94,9 +94,7 @@ className="bg-blue-600 px-6 py-2 rounded-xl font-bold hover:bg-blue-500"
 
 : (
 
-<div
-className="border border-white/10 rounded-3xl overflow-hidden"
->
+<div className="border border-gray-200 bg-white rounded-3xl overflow-hidden shadow-xl">
 
 <div className="relative h-[350px]">
 
@@ -117,7 +115,7 @@ className="object-cover"
 
 <button
 onClick={()=>setSelected(active)}
-className="bg-blue-600 px-6 py-2 rounded-xl mt-4"
+className="bg-blue-600 text-white px-6 py-2 rounded-xl mt-4"
 >
 
 {t.products.details}
@@ -135,13 +133,11 @@ className="bg-blue-600 px-6 py-2 rounded-xl mt-4"
 </div>
 
 
-{/* 🔥 POPUP */}
+{/* POPUP */}
 
 {selected && (
 
-<div className="fixed inset-0 z-[999] bg-[#020617]/95 backdrop-blur-xl animate-fadeIn">
-
-{/* CLOSE */}
+<div className="fixed inset-0 z-[999] bg-white/95 backdrop-blur-xl animate-fadeIn">
 
 <button
 onClick={()=>setSelected(null)}
@@ -156,23 +152,20 @@ className="absolute top-8 right-10 text-3xl z-50 hover:scale-110 transition"
 
 <div
 className={`grid md:grid-cols-2 gap-20 items-center
-transition-all duration-700 animate-slideUp
-${lang==="ar" ? "" : "md:flex-row-reverse"}`}
+transition-all duration-700 animate-slideUp`}
 >
 
 {/* IMAGE */}
 
 <div className="relative h-[600px] rounded-[40px] overflow-hidden
-border border-white/10 shadow-2xl">
+border border-gray-200 shadow-2xl">
 
 <Image
 src={selected.image}
 fill
 alt={selected.title}
-className="object-cover transition duration-[1200ms] scale-105"
+className="object-cover"
 />
-
-<div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"/>
 
 </div>
 
@@ -181,11 +174,11 @@ className="object-cover transition duration-[1200ms] scale-105"
 
 <div className={`${lang==="ar" ? "text-right" : "text-left"}`}>
 
-<h2 className="text-5xl font-black mb-10 animate-fadeUp">
+<h2 className="text-5xl font-black mb-10">
 {selected.title}
 </h2>
 
-<h3 className="text-yellow-400 text-xl mb-6">
+<h3 className="text-yellow-500 text-xl mb-6">
 ✨ Features
 </h3>
 
@@ -193,21 +186,13 @@ className="object-cover transition duration-[1200ms] scale-105"
 
 {selected.features?.map((f,i)=>(
 
-<li
-key={i}
-className="opacity-0 animate-stagger"
-style={{animationDelay:`${i*0.08}s`}}
->
-
-✔ {f}
-
-</li>
+<li key={i}>✔ {f}</li>
 
 ))}
 
 </ul>
 
-<h3 className="text-yellow-400 text-xl mb-6">
+<h3 className="text-yellow-500 text-xl mb-6">
 📐 Specifications
 </h3>
 
@@ -215,15 +200,7 @@ style={{animationDelay:`${i*0.08}s`}}
 
 {selected.specs?.map((s,i)=>(
 
-<li
-key={i}
-className="opacity-0 animate-stagger"
-style={{animationDelay:`${i*0.08}s`}}
->
-
-• {s}
-
-</li>
+<li key={i}>• {s}</li>
 
 ))}
 

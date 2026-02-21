@@ -10,35 +10,36 @@ import Reveal from "@/components/effects/Reveal";
 import { revalidatePath } from "next/cache";
 import ExportMap from "../components/sections/ExportMap";
 import Services from "@/components/sections/Services";
+import ReqestAds from "@/components/sections/ReqestAds";
 
 export default function Home() {
   return (
     <>
       <Navbar />
+
       <Hero />
-     
-  <About />
 
-  <div className="h-40 bg-gradient-to-b from-transparent to-[#020617]"/>
+      <About />
 
-  <Impact />
+      <div className="h-32 bg-gradient-to-b from-transparent to-[var(--bg-soft)]"/>
 
-  <div className="h-40 bg-gradient-to-b from-[#020617] to-transparent"/>
-       <div className="h-40 bg-gradient-to-b from-[#020617] to-transparent"/>
+      <Impact />
 
-  <Products />
-       <div className="h-40 bg-gradient-to-b from-transparent to-[#020617]"/>
+      <div className="h-32 bg-gradient-to-b from-[var(--bg-soft)] to-transparent"/>
 
-  <Reveal><Services /></Reveal>
-<ExportMap />
- 
-      <Reveal> <Industrial /></Reveal>
-    
-  
+      <Products />
+
+      <div className="h-32 bg-gradient-to-b from-transparent to-[var(--bg-soft)]"/>
+
+      <Reveal><Services /></Reveal>
+
+      <ExportMap />
+      <ReqestAds />
+      <Reveal><Industrial /></Reveal>
+
       <Reveal><Certificates /></Reveal>
       
       <Footer />
-      
     </>
   );
 }

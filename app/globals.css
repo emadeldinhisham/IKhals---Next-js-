@@ -1,29 +1,87 @@
 @import "tailwindcss";
 
+/* ===============================
+   🔥 ULTRA INDUSTRIAL LIGHT SYSTEM
+=================================*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+  /* BACKGROUND SYSTEM */
+
+  --bg-main: #f8fafc;
+  --bg-soft: #eef2f7;
+  --bg-card: #ffffff;
+
+  /* TEXT SYSTEM */
+
+  --text-main: #0f172a;
+  --text-soft: #475569;
+
+  /* ACCENTS */
+
+  --accent-blue: #2563eb;
+  --accent-gold: #d4a017;
+
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ===============================
+   GLOBAL BODY
+=================================*/
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+
+  background: var(--bg-main);   /* ❌ حذف gradient لأنه سبب الخطوط */
+  color: var(--text-main);
   font-family: Arial, Helvetica, sans-serif;
+
+  /* ULTRA SMOOTH */
+
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+
 }
+
+/* ===============================
+   INDUSTRIAL DEPTH SYSTEM
+=================================*/
+
+.section-surface {
+
+  background: var(--bg-main);
+
+}
+
+.section-soft {
+
+  background: var(--bg-soft);
+
+}
+
+.card-surface {
+
+  background: var(--bg-card);
+  border: 1px solid rgba(15,23,42,0.06);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.03),
+    0 2px 6px rgba(0,0,0,0.04);
+
+  transition: all .4s ease;
+
+}
+
+.card-surface:hover {
+
+  transform: translateY(-4px);
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.06),
+    0 5px 20px rgba(0,0,0,0.05);
+
+}
+
+/* ===============================
+   ANIMATIONS
+=================================*/
+
 @keyframes fade {
   from { opacity:0; }
   to { opacity:1; }
@@ -34,50 +92,65 @@ body {
   to { transform:scale(1); opacity:1; }
 }
 
-.animate-fade {
-  animation: fade 0.3s ease;
-}
-
-.animate-scale {
-  animation: scale 0.3s ease;
-}
 @keyframes gradientMove {
-
-0% { background-position:0% 50%; }
-50% { background-position:100% 50%; }
-100% { background-position:0% 50%; }
-
+  0% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
 }
 
-.animate-gradient{
-
-background-size:200% 200%;
-animation: gradientMove 6s ease infinite;
-
-}
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
+@keyframes fadeIn {
+  from{opacity:0}
+  to{opacity:1}
 }
 
-@keyframes slideUp{
-from{transform:translateY(80px);opacity:0}
-to{transform:translateY(0);opacity:1}
+@keyframes slideUp {
+  from{transform:translateY(80px);opacity:0}
+  to{transform:translateY(0);opacity:1}
 }
 
-@keyframes fadeUp{
-from{transform:translateY(20px);opacity:0}
-to{transform:translateY(0);opacity:1}
+@keyframes fadeUp {
+  from{transform:translateY(20px);opacity:0}
+  to{transform:translateY(0);opacity:1}
 }
 
-@keyframes stagger{
-to{opacity:1;transform:none}
-}
+/* CLASSES */
 
+.animate-fade { animation: fade .3s ease; }
+.animate-scale { animation: scale .3s ease; }
+.animate-gradient {
+  background-size:200% 200%;
+  animation: gradientMove 6s ease infinite;
+}
 .animate-fadeIn{animation:fadeIn .5s ease forwards}
 .animate-slideUp{animation:slideUp .7s ease forwards}
 .animate-fadeUp{animation:fadeUp .6s ease forwards}
-.animate-stagger{
-animation:fadeUp .5s ease forwards;
-transform:translateY(10px);
+
+/* ===============================
+   NAV LINK INDUSTRIAL EFFECT
+=================================*/
+
+.nav-link {
+
+ position:relative;
+ transition:0.3s;
+
+}
+
+.nav-link::after {
+
+ content:"";
+ position:absolute;
+ left:0;
+ bottom:-6px;
+ width:0%;
+ height:2px;
+ background:linear-gradient(to right,var(--accent-blue),var(--accent-gold));
+ transition:0.3s;
+
+}
+
+.nav-link:hover::after {
+
+ width:100%;
+
 }

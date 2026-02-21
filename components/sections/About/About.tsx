@@ -8,7 +8,6 @@ import { useEffect, useRef } from "react";
 export default function About() {
 
  const { t, lang } = useLanguage();
-
  const glowRef = useRef<HTMLDivElement>(null);
 
  useEffect(()=>{
@@ -26,7 +25,6 @@ export default function About() {
   };
 
   window.addEventListener("mousemove", moveGlow);
-
   return ()=> window.removeEventListener("mousemove", moveGlow);
 
  },[]);
@@ -38,21 +36,21 @@ export default function About() {
 
 <section
   id="about"
-  className="relative py-48 overflow-hidden text-white"
+  className="relative py-48 overflow-hidden bg-[#f6f8fb] text-slate-800"
 >
 
 {/* BACKGROUND */}
 
 <div className="absolute inset-0 pointer-events-none">
 
-<div className="absolute inset-0 opacity-20
-bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]
+<div className="absolute inset-0 opacity-10
+bg-[linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)]
 bg-[size:80px_80px]" />
 
 <div
 ref={glowRef}
 className="absolute w-[700px] h-[700px]
-bg-gradient-to-r from-yellow-500/20 to-blue-500/20
+bg-gradient-to-r from-yellow-400/20 to-blue-400/20
 blur-[200px] rounded-full transition-transform duration-300"
 />
 
@@ -69,7 +67,7 @@ ${lang==="ar" ? "text-right" : "text-left"}`}>
 <h2 className="text-6xl md:text-7xl font-black mb-16 leading-tight">
 
 <span className="bg-gradient-to-r
-from-blue-400 via-white to-yellow-400
+from-blue-500 via-slate-900 to-yellow-500
 bg-clip-text text-transparent">
 
 {t.about.title}
@@ -88,7 +86,7 @@ bg-clip-text text-transparent">
 {t.about.paragraphs.map((p,i)=>(
 
 <Reveal key={i}>
-<p className="text-xl text-gray-300 leading-relaxed">
+<p className="text-xl text-slate-600 leading-relaxed">
 {p}
 </p>
 </Reveal>
@@ -107,16 +105,17 @@ bg-clip-text text-transparent">
 <Reveal>
 
 <div className="p-12 rounded-[40px]
-bg-gradient-to-b from-white/5 to-white/0
-border border-white/10 backdrop-blur-xl
+bg-white
+border border-gray-200
+shadow-xl
 hover:scale-[1.03]
-hover:border-blue-400/40 transition duration-500">
+hover:border-blue-400 transition duration-500">
 
-<h3 className="text-3xl font-black text-blue-400 mb-6">
+<h3 className="text-3xl font-black text-blue-500 mb-6">
 {t.about.valuesTitle}
 </h3>
 
-<p className="text-gray-300 leading-relaxed">
+<p className="text-slate-600 leading-relaxed">
 {t.about.valuesText}
 </p>
 
@@ -130,16 +129,17 @@ hover:border-blue-400/40 transition duration-500">
 <Reveal>
 
 <div className="p-12 rounded-[40px]
-bg-gradient-to-b from-white/5 to-white/0
-border border-white/10 backdrop-blur-xl
+bg-white
+border border-gray-200
+shadow-xl
 hover:scale-[1.03]
-hover:border-yellow-400/40 transition duration-500">
+hover:border-yellow-400 transition duration-500">
 
-<h3 className="text-3xl font-black text-yellow-400 mb-6">
+<h3 className="text-3xl font-black text-yellow-500 mb-6">
 {t.about.whyTitle}
 </h3>
 
-<p className="text-gray-300 leading-relaxed">
+<p className="text-slate-600 leading-relaxed">
 {t.about.whyText}
 </p>
 
@@ -153,16 +153,17 @@ hover:border-yellow-400/40 transition duration-500">
 <Reveal>
 
 <div className="p-12 rounded-[40px]
-bg-gradient-to-b from-white/5 to-white/0
-border border-white/10 backdrop-blur-xl
+bg-white
+border border-gray-200
+shadow-xl
 hover:scale-[1.03]
-hover:border-green-400/40 transition duration-500">
+hover:border-green-400 transition duration-500">
 
-<h3 className="text-3xl font-black text-green-400 mb-6">
+<h3 className="text-3xl font-black text-green-500 mb-6">
 {t.about.historyTitle}
 </h3>
 
-<p className="text-gray-300 leading-relaxed">
+<p className="text-slate-600 leading-relaxed">
 {t.about.historyText}
 </p>
 
