@@ -30,7 +30,6 @@ export default function Hero() {
     return () => window.removeEventListener("mousemove", moveDepth);
   }, []);
 
-  // ✅ FIX 2: Mini cards نصوصها من t (أو fallback لو مش موجودة في الترجمة)
   const miniCards = t.hero?.cards ?? [
     { icon: <Award className="text-yellow-500" />, text: "جودة تصنيع عالية" },
     { icon: <Target className="text-blue-500" />, text: "حلول صناعية دقيقة" },
@@ -39,7 +38,8 @@ export default function Hero() {
 
   return (
     <CinematicSection>
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-[var(--bg-main)] text-[var(--text-main)] [perspective:1200px]">
+      {/* ✅ industry-pattern بدون نقطة في البداية */}
+      <section className="industry-pattern relative min-h-screen flex items-center overflow-hidden bg-[var(--bg-main)] text-[var(--text-main)] [perspective:1200px]">
 
         {/* BACKGROUND */}
         <div className="absolute inset-0">
@@ -47,7 +47,6 @@ export default function Hero() {
             bg-[linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)]
             bg-[size:70px_70px]" />
 
-          {/* ✅ FIX 3: موضع ابتدائي واضح للـ Glow */}
           <div
             ref={glowRef}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
@@ -114,7 +113,7 @@ export default function Hero() {
 
           </div>
 
-          {/* IMAGE — ✅ FIX 1: دائرة الخبرة داخل div الصورة */}
+          {/* IMAGE */}
           <div
             ref={imageRef}
             className="relative h-[70vh] rounded-[50px] overflow-visible border border-gray-200 shadow-xl"
@@ -123,14 +122,14 @@ export default function Hero() {
               <Image
                 src="/img/hero.png"
                 fill
-                alt="Industrial machinery" // ✅ FIX 4: alt أوضح
+                alt="Industrial machinery"
                 className="object-cover"
                 priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent" />
             </div>
 
-            {/* EXPERIENCE CIRCLE — ✅ موضعها الصحيح داخل div الصورة */}
+            {/* EXPERIENCE CIRCLE */}
             <div className="
               absolute
               bottom-[-40px]

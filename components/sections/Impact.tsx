@@ -31,7 +31,7 @@ color:"text-green-600"
 return(
 
 <section className="relative py-40 overflow-hidden bg-[#f6f8fb]">
-
+<section className="industry-pattern py-40 bg-[#f6f8fb] text-slate-900 text-center relative overflow-hidden">
 {/* LIGHT INDUSTRIAL BACKGROUND */}
 
 <div className="absolute inset-0 pointer-events-none">
@@ -90,6 +90,7 @@ hover:border-yellow-400/40
 
 </div>
 
+</section>
 </section>
 
 )

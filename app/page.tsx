@@ -7,10 +7,10 @@ import Certificates from "../components/sections/Certificates/Certificates";
 import Footer from "../components/layout/Footer";
 import Industrial from "../components/sections/Industrial/Industrial";
 import Reveal from "@/components/effects/Reveal";
-import { revalidatePath } from "next/cache";
 import ExportMap from "../components/sections/ExportMap";
 import Services from "@/components/sections/Services";
 import ReqestAds from "@/components/sections/ReqestAds";
+import StatsDivider from "@/components/sections/StatsDivider";
 
 export default function Home() {
   return (
@@ -18,27 +18,31 @@ export default function Home() {
       <Navbar />
 
       <Hero />
+      <StatsDivider />
 
       <About />
-
-      <div className="h-32 bg-gradient-to-b from-transparent to-[var(--bg-soft)]"/>
+      <StatsDivider />
 
       <Impact />
-
-      <div className="h-32 bg-gradient-to-b from-[var(--bg-soft)] to-transparent"/>
+      <StatsDivider />
 
       <Products />
-
-      <div className="h-32 bg-gradient-to-b from-transparent to-[var(--bg-soft)]"/>
+      <StatsDivider />
 
       <Reveal><Services /></Reveal>
+      <StatsDivider />
 
       <ExportMap />
+      <StatsDivider />
+
       <ReqestAds />
+      <StatsDivider />
+
       <Reveal><Industrial /></Reveal>
+      <StatsDivider />
 
       <Reveal><Certificates /></Reveal>
-      
+
       <Footer />
     </>
   );

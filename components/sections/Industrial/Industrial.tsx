@@ -12,9 +12,9 @@ export default function Industrial() {
   return (
 
     <section className="py-40 bg-[#f6f8fb] text-slate-900 text-center relative overflow-hidden">
-
+      <section className="industry-pattern py-40 bg-[#f6f8fb] text-slate-900 text-center relative overflow-hidden">
       {/* Industrial Grid Background */}
-
+        
       <div className="absolute inset-0 opacity-30
         bg-[linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)]
         bg-[size:80px_80px]" />
@@ -56,6 +56,6 @@ export default function Industrial() {
       </div>
 
     </section>
-
+</section>
   );
 }

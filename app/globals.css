@@ -5,152 +5,89 @@
 =================================*/
 
 :root {
-
-  /* BACKGROUND SYSTEM */
-
   --bg-main: #f8fafc;
   --bg-soft: #eef2f7;
   --bg-card: #ffffff;
-
-  /* TEXT SYSTEM */
-
   --text-main: #0f172a;
   --text-soft: #475569;
-
-  /* ACCENTS */
-
   --accent-blue: #2563eb;
   --accent-gold: #d4a017;
-
 }
-
-/* ===============================
-   GLOBAL BODY
-=================================*/
 
 body {
-
-  background: var(--bg-main);   /* ❌ حذف gradient لأنه سبب الخطوط */
+  background: var(--bg-main);
   color: var(--text-main);
-  font-family: Arial, Helvetica, sans-serif;
-
-  /* ULTRA SMOOTH */
-
+  font-family: 'Cairo', sans-serif; /* ✅ Cairo من الـ link في layout */
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
-
 }
 
-/* ===============================
-   INDUSTRIAL DEPTH SYSTEM
-=================================*/
-
-.section-surface {
-
-  background: var(--bg-main);
-
-}
-
-.section-soft {
-
-  background: var(--bg-soft);
-
-}
+.section-surface { background: var(--bg-main); }
+.section-soft { background: var(--bg-soft); }
 
 .card-surface {
-
   background: var(--bg-card);
   border: 1px solid rgba(15,23,42,0.06);
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.03),
-    0 2px 6px rgba(0,0,0,0.04);
-
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.04);
   transition: all .4s ease;
-
 }
 
 .card-surface:hover {
-
   transform: translateY(-4px);
-  box-shadow:
-    0 25px 60px rgba(0,0,0,0.06),
-    0 5px 20px rgba(0,0,0,0.05);
-
+  box-shadow: 0 25px 60px rgba(0,0,0,0.06), 0 5px 20px rgba(0,0,0,0.05);
 }
 
-/* ===============================
-   ANIMATIONS
-=================================*/
-
-@keyframes fade {
-  from { opacity:0; }
-  to { opacity:1; }
-}
-
-@keyframes scale {
-  from { transform:scale(0.9); opacity:0; }
-  to { transform:scale(1); opacity:1; }
-}
-
+@keyframes fade { from{opacity:0} to{opacity:1} }
+@keyframes scale { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
 @keyframes gradientMove {
-  0% { background-position:0% 50%; }
-  50% { background-position:100% 50%; }
-  100% { background-position:0% 50%; }
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes slideUp { from{transform:translateY(80px);opacity:0} to{transform:translateY(0);opacity:1} }
+@keyframes fadeUp { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
 
-@keyframes fadeIn {
-  from{opacity:0}
-  to{opacity:1}
-}
-
-@keyframes slideUp {
-  from{transform:translateY(80px);opacity:0}
-  to{transform:translateY(0);opacity:1}
-}
-
-@keyframes fadeUp {
-  from{transform:translateY(20px);opacity:0}
-  to{transform:translateY(0);opacity:1}
-}
-
-/* CLASSES */
-
-.animate-fade { animation: fade .3s ease; }
-.animate-scale { animation: scale .3s ease; }
-.animate-gradient {
-  background-size:200% 200%;
-  animation: gradientMove 6s ease infinite;
-}
+.animate-fade{animation:fade .3s ease}
+.animate-scale{animation:scale .3s ease}
+.animate-gradient{background-size:200% 200%;animation:gradientMove 6s ease infinite}
 .animate-fadeIn{animation:fadeIn .5s ease forwards}
 .animate-slideUp{animation:slideUp .7s ease forwards}
 .animate-fadeUp{animation:fadeUp .6s ease forwards}
 
-/* ===============================
-   NAV LINK INDUSTRIAL EFFECT
-=================================*/
-
-.nav-link {
-
- position:relative;
- transition:0.3s;
-
-}
-
+.nav-link { position:relative; transition:0.3s; }
 .nav-link::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:0%;
+  height:2px;
+  background:linear-gradient(to right,var(--accent-blue),var(--accent-gold));
+  transition:0.3s;
+}
+.nav-link:hover::after { width:100%; }
 
- content:"";
- position:absolute;
- left:0;
- bottom:-6px;
- width:0%;
- height:2px;
- background:linear-gradient(to right,var(--accent-blue),var(--accent-gold));
- transition:0.3s;
+.islamic-pattern { position: relative; }
 
+.industry-pattern { position: relative; }
+
+.industry-pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.055;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='126'%3E%3Cg fill='none' stroke='%23000' stroke-width='0.9'%3E%3Cpolygon points='55,8 98,32 98,80 55,104 12,80 12,32'/%3E%3Cpolygon points='55,28 76,40 76,64 55,76 34,64 34,40'/%3E%3Ccircle cx='55' cy='56' r='4'/%3E%3Cline x1='55' y1='52' x2='55' y2='28'/%3E%3Cline x1='55' y1='60' x2='55' y2='76'/%3E%3Cline x1='51' y1='54' x2='34' y2='40'/%3E%3Cline x1='59' y1='54' x2='76' y2='40'/%3E%3Cline x1='51' y1='58' x2='34' y2='64'/%3E%3Cline x1='59' y1='58' x2='76' y2='64'/%3E%3Ccircle cx='55' cy='28' r='2.5'/%3E%3Ccircle cx='76' cy='40' r='2.5'/%3E%3Ccircle cx='76' cy='64' r='2.5'/%3E%3Ccircle cx='55' cy='76' r='2.5'/%3E%3Ccircle cx='34' cy='64' r='2.5'/%3E%3Ccircle cx='34' cy='40' r='2.5'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='%23000' stroke='%23000' stroke-width='0.6'%3E%3Ccircle cx='10' cy='10' r='2'/%3E%3Ccircle cx='50' cy='10' r='2'/%3E%3Ccircle cx='30' cy='30' r='3'/%3E%3Ccircle cx='10' cy='50' r='2'/%3E%3Ccircle cx='50' cy='50' r='2'/%3E%3Cline x1='10' y1='10' x2='30' y2='30'/%3E%3Cline x1='50' y1='10' x2='30' y2='30'/%3E%3Cline x1='10' y1='50' x2='30' y2='30'/%3E%3Cline x1='50' y1='50' x2='30' y2='30'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg stroke='%23000' stroke-width='0.5'%3E%3Cline x1='0' y1='40' x2='40' y2='0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 110px 126px, 60px 60px, 40px 40px;
+  background-repeat: repeat, repeat, repeat;
 }
 
-.nav-link:hover::after {
-
- width:100%;
-
+.industry-pattern > * {
+  position: relative;
+  z-index: 1;
 }

@@ -27,7 +27,7 @@ export default function ExportMap() {
 
   return (
     <section className="relative py-28 bg-[var(--bg-main)] overflow-hidden">
-
+    <section className="industry-pattern py-40 bg-[#f6f8fb] text-slate-900 text-center relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
@@ -150,6 +150,7 @@ export default function ExportMap() {
         ))}
       </div>
 
+    </section>
     </section>
   );
 }

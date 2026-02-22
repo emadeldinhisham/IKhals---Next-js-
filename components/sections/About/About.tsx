@@ -38,7 +38,7 @@ export default function About() {
   id="about"
   className="relative py-48 overflow-hidden bg-[#f6f8fb] text-slate-800"
 >
-
+<section className="industry-pattern py-40 bg-[#f6f8fb] text-slate-900 text-center relative overflow-hidden">
 {/* BACKGROUND */}
 
 <div className="absolute inset-0 pointer-events-none">
@@ -176,7 +176,7 @@ hover:border-green-400 transition duration-500">
 </div>
 
 </section>
-
+</section>
 </CinematicSection>
 
   );

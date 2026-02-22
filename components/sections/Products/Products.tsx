@@ -16,7 +16,7 @@ const [selected,setSelected] = useState(null);
 return (
 
 <section id="products" className="py-40 bg-[#f6f8fb] text-slate-800">
-
+<section className="industry-pattern py-40 bg-[#f6f8fb] text-slate-900 text-center relative overflow-hidden">
 <div className="max-w-7xl mx-auto px-6">
 
 <h2 className="text-center text-5xl font-black mb-20">
@@ -219,6 +219,6 @@ className="object-cover"
 )}
 
 </section>
-
+</section>
 );
 }

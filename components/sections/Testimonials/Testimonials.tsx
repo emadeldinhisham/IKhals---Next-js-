@@ -26,7 +26,7 @@ const handleLeave = (e:any) => {
 };
 
 return (
-
+<section className="industry-pattern py-40 bg-[#f6f8fb] text-slate-900 text-center relative overflow-hidden">
 <section className="py-40 relative overflow-hidden bg-[#f6f8fb]">
 
 {/* LIGHT INDUSTRIAL BACKGROUND */}
@@ -105,6 +105,6 @@ bg-gradient-to-br from-yellow-400/10 to-transparent rounded-[40px]" />
 </div>
 
 </section>
-
+</section>
 );
 }

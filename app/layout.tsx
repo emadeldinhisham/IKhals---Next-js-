@@ -17,25 +17,17 @@ export const metadata: Metadata = {
     "PP Woven Bags",
     "Plastic Packaging Egypt",
     "Industrial Packaging",
-    "plastic packaging",
-    "raffia bags",
-    "BOPP bags",
-    "industrial packaging",
   ],
   authors: [{ name: "Al-Ikhlas Plastic Industries" }],
   openGraph: {
     title: "الإخلاص للصناعات البلاستيكية",
-    description:
-      "نصنع الجودة… ونقود المستقبل في حلول التعبئة الصناعية.",
+    description: "نصنع الجودة… ونقود المستقبل في حلول التعبئة الصناعية.",
     url: "https://ikhlas.com",
     siteName: "Al-Ikhlas Plastics",
     locale: "ar_EG",
     type: "website",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -44,24 +36,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+    
     <html lang="ar" dir="rtl">
+      <head>
+        {/* ✅ خط Cairo عبر link مباشرة — يعمل مع Tailwind v4 */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
-      <CinematicFX />
-      <SmoothScroll />
-          <LanguageProvider>
-            {children}
-          </LanguageProvider>
-      
-      <div className="fixed inset-0 pointer-events-none z-0">
+        <CinematicFX />
+        <SmoothScroll />
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
 
-  {/* Glow صناعي */}
-  <div className="absolute top-[-200px] left-[10%] w-[600px] h-[600px] bg-yellow-500/10 blur-[160px] rounded-full"/>
-
-  {/* Glow ثاني */}
-  <div className="absolute bottom-[-200px] right-[10%] w-[500px] h-[500px] bg-blue-500/10 blur-[160px] rounded-full"/>
-
-</div>
-
+        <div className="fixed inset-0 pointer-events-none z-0">
+          <div className="absolute top-[-200px] left-[10%] w-[600px] h-[600px] bg-yellow-500/10 blur-[160px] rounded-full"/>
+          <div className="absolute bottom-[-200px] right-[10%] w-[500px] h-[500px] bg-blue-500/10 blur-[160px] rounded-full"/>
+        </div>
       </body>
     </html>
   );

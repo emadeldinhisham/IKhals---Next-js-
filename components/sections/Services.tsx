@@ -16,7 +16,7 @@ const icons = [
 return (
 
 <section className="relative py-48 overflow-hidden bg-[#f6f8fb]">
-
+<section className="industry-pattern py-40 bg-[#f6f8fb] text-slate-900 text-center relative overflow-hidden">
 {/* INDUSTRIAL GRID BACKGROUND */}
 
 <div className="absolute inset-0 opacity-30
@@ -98,6 +98,6 @@ transition duration-500">
 </div>
 
 </section>
-
+</section>
 );
 }
