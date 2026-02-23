@@ -17,7 +17,7 @@
 body {
   background: var(--bg-main);
   color: var(--text-main);
-  font-family: 'Cairo', sans-serif; /* ✅ Cairo من الـ link في layout */
+  font-family: 'Cairo', sans-serif;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
 }
@@ -70,7 +70,11 @@ body {
 
 .islamic-pattern { position: relative; }
 
-.industry-pattern { position: relative; }
+/* ✅ industry-pattern مصحح بدون > * */
+.industry-pattern {
+  position: relative;
+  overflow: hidden; /* ✅ هذا يمنع المسافة الزائدة */
+}
 
 .industry-pattern::before {
   content: "";
@@ -87,7 +91,4 @@ body {
   background-repeat: repeat, repeat, repeat;
 }
 
-.industry-pattern > * {
-  position: relative;
-  z-index: 1;
-}
+/* ✅ حذف .industry-pattern > * الذي كان يسبب المشكلة */
