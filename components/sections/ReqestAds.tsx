@@ -4,14 +4,10 @@ import { useState, useRef } from "react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import emailjs from "@emailjs/browser";
 
-// =============================================
-// ⚙️ إعدادات EmailJS — عدّل هذه القيم فقط
-// =============================================
-const EMAILJS_SERVICE_ID  = "service_3h61ej1";   // من لوحة EmailJS
-const EMAILJS_TEMPLATE_ID = "template_3cwu65p";  // من لوحة EmailJS
-const EMAILJS_PUBLIC_KEY  = "Hxt1ORdZ3xjJ19xXc";     // Public Key من EmailJS
-const TO_EMAIL             = "emadeldinhisham@gmail.com";  // الإيميل المستلِم
-// =============================================
+const EMAILJS_SERVICE_ID  = "service_3h61ej1";
+const EMAILJS_TEMPLATE_ID = "template_3cwu65p";
+const EMAILJS_PUBLIC_KEY  = "Hxt1ORdZ3xjJ19xXc";
+const TO_EMAIL             = "emadeldinhisham@gmail.com";
 
 const COLORS = [
   { nameAr: "أبيض",       nameEn: "White",       hex: "#FFFFFF", border: "#e2e8f0" },
@@ -32,20 +28,34 @@ const COLORS = [
   { nameAr: "بنفسجي",     nameEn: "Purple",      hex: "#7C3AED", border: "#6d28d9" },
 ];
 
-const WEIGHTS = ["5 kg", "10 kg", "25 kg", "50 kg", "100 kg", "مخصص / Custom"];
+const WEIGHTS = ["35 kg", "40 kg", "50 kg", "52 kg", "60 kg", "62 kg", "70 kg", "80 kg", "100+ kg"];
 
-// رسم الشكارة SVG ثلاثية الأبعاد
+const ROLL_TYPES = {
+  ar: ["رول سادة", "رول مطلي", "رول مشروح"],
+  en: ["Plain Roll", "Coated Roll", "Laminated Roll"],
+};
+
+const BAG_TYPES = {
+  ar: ["أكياس سادة", "أكياس مطبوعة", "أكياس BOPP & Laminated"],
+  en: ["Plain Bags", "Printed Bags", "BOPP & Laminated Bags"],
+};
+
+const PRINT_COLORS = ["1", "2", "3", "4", "5", "6", "7", "8"];
+
+const COATING_SIDES = {
+  ar: ["وجه واحد", "وجهين"],
+  en: ["One Side", "Both Sides"],
+};
+
 function BagSVG({ color, borderColor }: { color: string; borderColor: string }) {
   const isLight = ["#FFFFFF","#FFF8E7","#F5DEB3","#D1D5DB","#BFDBFE","#EAB308"].includes(color);
   const textColor = isLight ? "#374151" : "#ffffff";
   const shadow = isLight ? "rgba(0,0,0,0.15)" : "rgba(0,0,0,0.4)";
-
   return (
     <svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-2xl">
       <defs>
         <linearGradient id="bagFront" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor={color} stopOpacity="1"/>
-          <stop offset="60%" stopColor={color} stopOpacity="0.95"/>
           <stop offset="100%" stopColor={shadow} stopOpacity="0.6"/>
         </linearGradient>
         <linearGradient id="bagSide" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -60,75 +70,18 @@ function BagSVG({ color, borderColor }: { color: string; borderColor: string }) 
           <feDropShadow dx="4" dy="8" stdDeviation="10" floodOpacity="0.25"/>
         </filter>
       </defs>
-
-      {/* ظل الكيس */}
       <ellipse cx="110" cy="268" rx="75" ry="10" fill="rgba(0,0,0,0.15)"/>
-
-      {/* الجانب الأيمن (3D) */}
-      <polygon
-        points="170,55 200,70 200,240 170,230"
-        fill="url(#bagSide)"
-        stroke={borderColor}
-        strokeWidth="0.5"
-      />
-
-      {/* الوجه الأمامي */}
-      <rect
-        x="30" y="55" width="140" height="175"
-        rx="8" ry="8"
-        fill="url(#bagFront)"
-        stroke={borderColor}
-        strokeWidth="1"
-        filter="url(#bagShadow)"
-      />
-
-      {/* الجزء العلوي (القمة) */}
-      <polygon
-        points="30,55 170,55 200,70 60,70"
-        fill="url(#bagTop)"
-        stroke={borderColor}
-        strokeWidth="0.5"
-      />
-
-      {/* خياطة الوجه */}
-      <rect x="40" y="65" width="120" height="155" rx="4"
-        fill="none" stroke={textColor} strokeWidth="1" strokeOpacity="0.2"
-        strokeDasharray="4,3"/>
-
-      {/* شريط علوي */}
-      <rect x="30" y="55" width="140" height="22" rx="4"
-        fill={borderColor} opacity="0.5"/>
-
-      {/* خط الخياطة العلوي */}
-      <line x1="50" y1="66" x2="150" y2="66"
-        stroke={textColor} strokeWidth="1" strokeOpacity="0.4" strokeDasharray="3,3"/>
-
-      {/* شريط سفلي */}
-      <rect x="30" y="208" width="140" height="22" rx="4"
-        fill={borderColor} opacity="0.5"/>
-
-      {/* خط الخياطة السفلي */}
-      <line x1="50" y1="219" x2="150" y2="219"
-        stroke={textColor} strokeWidth="1" strokeOpacity="0.4" strokeDasharray="3,3"/>
-
-      {/* شعار وسط الكيس */}
-      <circle cx="100" cy="143" r="28"
-        fill={textColor} fillOpacity="0.08"
-        stroke={textColor} strokeWidth="0.8" strokeOpacity="0.2"/>
-      <text x="100" y="138" textAnchor="middle"
-        fontSize="9" fill={textColor} fillOpacity="0.5" fontFamily="serif" fontWeight="bold">
-        INDUSTRIAL
-      </text>
-      <text x="100" y="151" textAnchor="middle"
-        fontSize="7" fill={textColor} fillOpacity="0.4" fontFamily="serif">
-        PACKAGING
-      </text>
-
-      {/* فتحة علوية (valve) */}
-      <rect x="82" y="48" width="36" height="10" rx="3"
-        fill={borderColor} stroke={borderColor} strokeWidth="0.5"/>
-      <rect x="90" y="44" width="20" height="8" rx="2"
-        fill={color} stroke={borderColor} strokeWidth="0.5"/>
+      <polygon points="170,55 200,70 200,240 170,230" fill="url(#bagSide)" stroke={borderColor} strokeWidth="0.5"/>
+      <rect x="30" y="55" width="140" height="175" rx="8" ry="8" fill="url(#bagFront)" stroke={borderColor} strokeWidth="1" filter="url(#bagShadow)"/>
+      <polygon points="30,55 170,55 200,70 60,70" fill="url(#bagTop)" stroke={borderColor} strokeWidth="0.5"/>
+      <rect x="40" y="65" width="120" height="155" rx="4" fill="none" stroke={textColor} strokeWidth="1" strokeOpacity="0.2" strokeDasharray="4,3"/>
+      <rect x="30" y="55" width="140" height="22" rx="4" fill={borderColor} opacity="0.5"/>
+      <rect x="30" y="208" width="140" height="22" rx="4" fill={borderColor} opacity="0.5"/>
+      <circle cx="100" cy="143" r="28" fill={textColor} fillOpacity="0.08" stroke={textColor} strokeWidth="0.8" strokeOpacity="0.2"/>
+      <text x="100" y="138" textAnchor="middle" fontSize="9" fill={textColor} fillOpacity="0.5" fontFamily="serif" fontWeight="bold">INDUSTRIAL</text>
+      <text x="100" y="151" textAnchor="middle" fontSize="7" fill={textColor} fillOpacity="0.4" fontFamily="serif">PACKAGING</text>
+      <rect x="82" y="48" width="36" height="10" rx="3" fill={borderColor} stroke={borderColor} strokeWidth="0.5"/>
+      <rect x="90" y="44" width="20" height="8" rx="2" fill={color} stroke={borderColor} strokeWidth="0.5"/>
     </svg>
   );
 }
@@ -139,16 +92,15 @@ export default function QuoteRequest() {
   const formRef = useRef<HTMLFormElement>(null);
 
   const [selectedColor, setSelectedColor] = useState(COLORS[0]);
+  const [productType, setProductType] = useState<"" | "roll" | "bag">("");
+  const [rollType, setRollType] = useState("");
+  const [bagType, setBagType] = useState("");
+  const [coatingSides, setCoatingSides] = useState("");
+  const [printColors, setPrintColors] = useState("");
+
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    weight: "",
-    width: "",
-    height: "",
-    depth: "",
-    quantity: "",
-    notes: "",
+    name: "", email: "", phone: "",
+    weight: "", width: "", height: "", quantity: "", notes: "",
   });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
@@ -156,50 +108,51 @@ export default function QuoteRequest() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // هل يظهر اختيار الطلاء؟
+  const showCoating = productType === "bag" && bagType === (isAr ? "أكياس BOPP & Laminated" : "BOPP & Laminated Bags");
+  // هل يظهر اختيار ألوان الطباعة؟
+  const showPrintColors = productType === "bag" && (
+    bagType === (isAr ? "أكياس مطبوعة" : "Printed Bags") ||
+    bagType === (isAr ? "أكياس BOPP & Laminated" : "BOPP & Laminated Bags")
+  );
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-
     const templateParams = {
-      to_email:    TO_EMAIL,
-      from_name:   form.name,
-      from_email:  form.email,
-      phone:       form.phone,
-      bag_color:   isAr ? selectedColor.nameAr : selectedColor.nameEn,
+      to_email: TO_EMAIL,
+      from_name: form.name,
+      from_email: form.email,
+      phone: form.phone,
+      product_type: productType === "roll" ? (isAr ? "رول" : "Roll") : (isAr ? "شكارة" : "Bag"),
+      product_subtype: productType === "roll" ? rollType : bagType,
+      coating_sides: coatingSides || "-",
+      print_colors: printColors ? `${printColors} ${isAr ? "ألوان" : "Colors"}` : "-",
+      bag_color: isAr ? selectedColor.nameAr : selectedColor.nameEn,
       bag_color_hex: selectedColor.hex,
-      weight:      form.weight,
-      width:       form.width,
-      height:      form.height,
-      depth:       form.depth,
-      quantity:    form.quantity,
-      notes:       form.notes,
-    };
+      weight: form.weight,
+      width: form.width,
+      height: form.height,
 
+      quantity: form.quantity,
+      notes: form.notes,
+    };
     try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
-      );
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
       setStatus("sent");
-      setForm({ name:"", email:"", phone:"", weight:"", width:"", height:"", depth:"", quantity:"", notes:"" });
+      setForm({ name:"", email:"", phone:"", weight:"", width:"", height:"", quantity:"", notes:"" });
+      setProductType(""); setRollType(""); setBagType(""); setCoatingSides(""); setPrintColors("");
     } catch {
       setStatus("error");
     }
   };
 
-  const inputClass = `w-full px-4 py-3 rounded-xl border border-gray-200 bg-white
-    text-sm text-slate-700 placeholder-slate-400
-    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-    transition-all duration-200`;
-
+  const inputClass = `w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`;
   const labelClass = `block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5`;
 
   return (
     <section className="relative py-24 bg-[var(--bg-main)] overflow-hidden">
 
-      {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
           w-[900px] h-[600px] rounded-full
@@ -215,28 +168,20 @@ export default function QuoteRequest() {
           </span>
           <h2 className="mt-3 text-4xl xl:text-5xl font-black text-[var(--text-main)]">
             {isAr ? "صمّم" : "Design Your"}{" "}
-            <span className="text-blue-600">
-              {isAr ? "شكارتك" : "Bag"}
-            </span>
+            <span className="text-blue-600">{isAr ? "طلبك" : "Order"}</span>
           </h2>
           <p className="mt-4 text-slate-500 max-w-lg text-lg">
-            {isAr
-              ? "حدد المواصفات واللون والأبعاد وسنرسل لك عرض السعر فوراً"
-              : "Specify your bag details and we'll send you a quote immediately"}
+            {isAr ? "حدد المواصفات وسنرسل لك عرض السعر فوراً" : "Specify your details and we'll send you a quote immediately"}
           </p>
         </div>
 
         <form ref={formRef} onSubmit={handleSubmit}>
           <div className="grid lg:grid-cols-2 gap-12 items-start">
 
-            {/* ===== LEFT: Bag Preview ===== */}
+            {/* LEFT: Preview */}
             <div className="flex flex-col items-center gap-8">
-
-              {/* 3D Bag */}
               <div className="relative w-64 h-80 transition-all duration-500">
                 <BagSVG color={selectedColor.hex} borderColor={selectedColor.border}/>
-
-                {/* Weight badge */}
                 {form.weight && (
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2
                     bg-white/90 backdrop-blur-sm border border-gray-200
@@ -246,7 +191,6 @@ export default function QuoteRequest() {
                 )}
               </div>
 
-              {/* Color name */}
               <div className="text-center">
                 <p className="text-xs text-slate-400 uppercase tracking-widest mb-1">
                   {isAr ? "اللون المختار" : "Selected Color"}
@@ -256,36 +200,25 @@ export default function QuoteRequest() {
                 </p>
               </div>
 
-              {/* Color Picker */}
               <div className="w-full">
-                <p className={labelClass}>
-                  {isAr ? "اختر اللون" : "Choose Color"}
-                </p>
+                <p className={labelClass}>{isAr ? "اختر اللون" : "Choose Color"}</p>
                 <div className="grid grid-cols-8 gap-2">
                   {COLORS.map((c) => (
-                    <button
-                      key={c.hex}
-                      type="button"
-                      title={isAr ? c.nameAr : c.nameEn}
+                    <button key={c.hex} type="button" title={isAr ? c.nameAr : c.nameEn}
                       onClick={() => setSelectedColor(c)}
                       className="w-full aspect-square rounded-lg transition-all duration-200 hover:scale-110"
                       style={{
                         backgroundColor: c.hex,
-                        border: selectedColor.hex === c.hex
-                          ? `3px solid #2563eb`
-                          : `2px solid ${c.border}`,
-                        boxShadow: selectedColor.hex === c.hex
-                          ? "0 0 0 2px #bfdbfe"
-                          : "none",
+                        border: selectedColor.hex === c.hex ? `3px solid #2563eb` : `2px solid ${c.border}`,
+                        boxShadow: selectedColor.hex === c.hex ? "0 0 0 2px #bfdbfe" : "none",
                       }}
                     />
                   ))}
                 </div>
               </div>
-
             </div>
 
-            {/* ===== RIGHT: Form ===== */}
+            {/* RIGHT: Form */}
             <div className="bg-white rounded-3xl border border-gray-100 shadow-xl p-8 flex flex-col gap-6">
 
               {/* Personal Info */}
@@ -293,60 +226,155 @@ export default function QuoteRequest() {
                 <div className="col-span-2">
                   <label className={labelClass}>{isAr ? "الاسم الكامل" : "Full Name"} *</label>
                   <input name="name" required value={form.name} onChange={handleChange}
-                    placeholder={isAr ? "محمد أحمد" : "John Doe"}
-                    className={inputClass}/>
+                    placeholder={isAr ? "محمد أحمد" : "John Doe"} className={inputClass}/>
                 </div>
                 <div>
                   <label className={labelClass}>{isAr ? "البريد الإلكتروني" : "Email"} *</label>
                   <input name="email" type="email" required value={form.email} onChange={handleChange}
-                    placeholder="email@example.com"
-                    className={inputClass}/>
+                    placeholder="email@example.com" className={inputClass}/>
                 </div>
                 <div>
                   <label className={labelClass}>{isAr ? "رقم الهاتف" : "Phone"}</label>
                   <input name="phone" value={form.phone} onChange={handleChange}
-                    placeholder="+966 5x xxx xxxx"
-                    className={inputClass}/>
+                    placeholder="+966 5x xxx xxxx" className={inputClass}/>
                 </div>
               </div>
 
-              {/* Bag Specs */}
+              {/* ===== STEP 1: Product Type ===== */}
               <div>
                 <p className="text-sm font-black text-slate-700 mb-4 pb-2 border-b border-gray-100">
-                  {isAr ? "📦 مواصفات الشكارة" : "📦 Bag Specifications"}
+                  {isAr ? "🎯 اختر نوع المنتج" : "🎯 Select Product Type"}
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { val: "roll", labelAr: "🧻 رول", labelEn: "🧻 Roll" },
+                    { val: "bag",  labelAr: "👜 شكارة", labelEn: "👜 Bag" },
+                  ].map(opt => (
+                    <button key={opt.val} type="button"
+                      onClick={() => { setProductType(opt.val as "roll" | "bag"); setRollType(""); setBagType(""); setCoatingSides(""); setPrintColors(""); }}
+                      className={`py-3 rounded-2xl font-black text-sm transition-all duration-200
+                        ${productType === opt.val
+                          ? "bg-blue-600 text-white shadow-lg shadow-blue-200 scale-105"
+                          : "bg-slate-50 text-slate-600 border border-gray-200 hover:border-blue-300 hover:bg-blue-50"}`}
+                    >
+                      {isAr ? opt.labelAr : opt.labelEn}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* ===== STEP 2: Roll Type ===== */}
+              {productType === "roll" && (
+                <div>
+                  <p className="text-sm font-black text-slate-700 mb-4 pb-2 border-b border-gray-100">
+                    {isAr ? "🧻 نوع الرول" : "🧻 Roll Type"}
+                  </p>
+                  <div className="grid grid-cols-1 gap-2">
+                    {(isAr ? ROLL_TYPES.ar : ROLL_TYPES.en).map(type => (
+                      <button key={type} type="button"
+                        onClick={() => setRollType(type)}
+                        className={`py-3 px-4 rounded-2xl font-bold text-sm text-start transition-all duration-200
+                          ${rollType === type
+                            ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+                            : "bg-slate-50 text-slate-600 border border-gray-200 hover:border-blue-300 hover:bg-blue-50"}`}
+                      >
+                        {type}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ===== STEP 2: Bag Type ===== */}
+              {productType === "bag" && (
+                <div>
+                  <p className="text-sm font-black text-slate-700 mb-4 pb-2 border-b border-gray-100">
+                    {isAr ? "👜 نوع الشكارة" : "👜 Bag Type"}
+                  </p>
+                  <div className="grid grid-cols-1 gap-2">
+                    {(isAr ? BAG_TYPES.ar : BAG_TYPES.en).map(type => (
+                      <button key={type} type="button"
+                        onClick={() => { setBagType(type); setCoatingSides(""); setPrintColors(""); }}
+                        className={`py-3 px-4 rounded-2xl font-bold text-sm text-start transition-all duration-200
+                          ${bagType === type
+                            ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+                            : "bg-slate-50 text-slate-600 border border-gray-200 hover:border-blue-300 hover:bg-blue-50"}`}
+                      >
+                        {type}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ===== STEP 3: Coating Sides ===== */}
+              {showCoating && (
+                <div>
+                  <p className="text-sm font-black text-slate-700 mb-4 pb-2 border-b border-gray-100">
+                    {isAr ? "🖥️ عدد وجوه الطلاء" : "🖥️ Coating Sides"}
+                  </p>
+                  <div className="grid grid-cols-2 gap-3">
+                    {(isAr ? COATING_SIDES.ar : COATING_SIDES.en).map(side => (
+                      <button key={side} type="button"
+                        onClick={() => setCoatingSides(side)}
+                        className={`py-3 rounded-2xl font-bold text-sm transition-all duration-200
+                          ${coatingSides === side
+                            ? "bg-blue-600 text-white shadow-md shadow-blue-200 scale-105"
+                            : "bg-slate-50 text-slate-600 border border-gray-200 hover:border-blue-300 hover:bg-blue-50"}`}
+                      >
+                        {side}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ===== STEP 3: Print Colors ===== */}
+              {showPrintColors && (
+                <div>
+                  <p className="text-sm font-black text-slate-700 mb-4 pb-2 border-b border-gray-100">
+                    {isAr ? "🎨 عدد ألوان الطباعة" : "🎨 Number of Print Colors"}
+                  </p>
+                  <div className="grid grid-cols-8 gap-2">
+                    {PRINT_COLORS.map(n => (
+                      <button key={n} type="button"
+                        onClick={() => setPrintColors(n)}
+                        className={`py-2.5 rounded-xl font-black text-sm transition-all duration-200
+                          ${printColors === n
+                            ? "bg-blue-600 text-white shadow-md shadow-blue-200 scale-110"
+                            : "bg-slate-50 text-slate-600 border border-gray-200 hover:border-blue-300 hover:bg-blue-50"}`}
+                      >
+                        {n}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Specs */}
+              <div>
+                <p className="text-sm font-black text-slate-700 mb-4 pb-2 border-b border-gray-100">
+                  {isAr ? "📦 المواصفات" : "📦 Specifications"}
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="col-span-2">
                     <label className={labelClass}>{isAr ? "الوزن" : "Weight"} *</label>
-                    <select name="weight" required value={form.weight} onChange={handleChange}
-                      className={inputClass}>
+                    <select name="weight" required value={form.weight} onChange={handleChange} className={inputClass}>
                       <option value="">{isAr ? "اختر الوزن..." : "Select weight..."}</option>
-                      {WEIGHTS.map(w => (
-                        <option key={w} value={w}>{w}</option>
-                      ))}
+                      {WEIGHTS.map(w => <option key={w} value={w}>{w}</option>)}
                     </select>
                   </div>
-
-                  {/* Dimensions */}
                   <div>
                     <label className={labelClass}>{isAr ? "العرض (سم)" : "Width (cm)"}</label>
-                    <input name="width" type="number" value={form.width} onChange={handleChange}
-                      placeholder="50" className={inputClass}/>
+                    <input name="width" type="number" value={form.width} onChange={handleChange} placeholder="50" className={inputClass}/>
                   </div>
                   <div>
                     <label className={labelClass}>{isAr ? "الارتفاع (سم)" : "Height (cm)"}</label>
-                    <input name="height" type="number" value={form.height} onChange={handleChange}
-                      placeholder="80" className={inputClass}/>
+                    <input name="height" type="number" value={form.height} onChange={handleChange} placeholder="80" className={inputClass}/>
                   </div>
                   <div>
-                    <label className={labelClass}>{isAr ? "العمق (سم)" : "Depth (cm)"}</label>
-                    <input name="depth" type="number" value={form.depth} onChange={handleChange}
-                      placeholder="10" className={inputClass}/>
-                  </div>
-                  <div>
-                    <label className={labelClass}>{isAr ? "الكمية (قطعة)" : "Quantity"} *</label>
-                    <input name="quantity" type="number" required value={form.quantity} onChange={handleChange}
-                      placeholder="1000" className={inputClass}/>
+                    <label className={labelClass}>{isAr ? "الكمية" : "Quantity"} *</label>
+                    <input name="quantity" type="number" required value={form.quantity} onChange={handleChange} placeholder="1000" className={inputClass}/>
                   </div>
                 </div>
               </div>
@@ -354,8 +382,7 @@ export default function QuoteRequest() {
               {/* Notes */}
               <div>
                 <label className={labelClass}>{isAr ? "ملاحظات إضافية" : "Additional Notes"}</label>
-                <textarea name="notes" value={form.notes} onChange={handleChange}
-                  rows={3}
+                <textarea name="notes" value={form.notes} onChange={handleChange} rows={3}
                   placeholder={isAr ? "أي تفاصيل إضافية..." : "Any additional details..."}
                   className={`${inputClass} resize-none`}/>
               </div>
@@ -374,8 +401,7 @@ export default function QuoteRequest() {
               </div>
 
               {/* Submit */}
-              <button
-                type="submit"
+              <button type="submit"
                 disabled={status === "sending" || status === "sent"}
                 className="w-full py-4 rounded-xl font-black text-white text-base
                   bg-blue-600 hover:bg-blue-500 active:bg-blue-700
@@ -390,9 +416,7 @@ export default function QuoteRequest() {
 
               {status === "sent" && (
                 <p className="text-center text-sm text-green-600 font-semibold">
-                  {isAr
-                    ? "سنتواصل معك في أقرب وقت ممكن 🎉"
-                    : "We'll get back to you as soon as possible 🎉"}
+                  {isAr ? "سنتواصل معك في أقرب وقت ممكن 🎉" : "We'll get back to you as soon as possible 🎉"}
                 </p>
               )}
 

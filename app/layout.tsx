@@ -1,63 +1,36 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import CinematicFX from "@/components/effects/CinematicFX";
-import SmoothScroll from "@/components/effects/SmoothScroll";
-import { LanguageProvider } from "@/components/providers/LanguageProvider";
 
 export const metadata: Metadata = {
-  title: {
-    default: "الإخلاص للصناعات البلاستيكية | حلول تعبئة متكاملة",
-    template: "%s | الإخلاص للصناعات البلاستيكية",
-  },
-  description:
-    "شركة الإخلاص للصناعات البلاستيكية – رائدة في تصنيع أكياس البولي بروبلين المنسوجة وحلول التعبئة الصناعية منذ 2013.",
-  keywords: [
-    "أكياس بلاستيك",
-    "أكياس بولي بروبلين",
-    "PP Woven Bags",
-    "Plastic Packaging Egypt",
-    "Industrial Packaging",
-  ],
-  authors: [{ name: "Al-Ikhlas Plastic Industries" }],
-  openGraph: {
-    title: "الإخلاص للصناعات البلاستيكية",
-    description: "نصنع الجودة… ونقود المستقبل في حلول التعبئة الصناعية.",
-    url: "https://ikhlas.com",
-    siteName: "Al-Ikhlas Plastics",
-    locale: "ar_EG",
-    type: "website",
-  },
-  robots: { index: true, follow: true },
+  title: "الإخلاص للصناعات البلاستيكية",
+  description: "Al Ikhlas Plastic Industries",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    
-    <html lang="ar" dir="rtl">
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
-        {/* ✅ خط Cairo عبر link مباشرة — يعمل مع Tailwind v4 */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
+        {/* يمنع وميض الوضع الليلي عند تحميل الصفحة */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.getItem('darkMode') === 'true') {
+                  document.documentElement.classList.add('dark');
+                }
+              } catch(e) {}
+            `,
+          }}
+        />
       </head>
-      <body>
-        <CinematicFX />
-        <SmoothScroll />
-        <LanguageProvider>
-          {children}
-        </LanguageProvider>
-
-        <div className="fixed inset-0 pointer-events-none z-0">
-          <div className="absolute top-[-200px] left-[10%] w-[600px] h-[600px] bg-yellow-500/10 blur-[160px] rounded-full"/>
-          <div className="absolute bottom-[-200px] right-[10%] w-[500px] h-[500px] bg-blue-500/10 blur-[160px] rounded-full"/>
-        </div>
+      <body suppressHydrationWarning>
+        {children}
       </body>
     </html>
   );

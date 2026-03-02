@@ -6,15 +6,16 @@ import Products from "../components/sections/Products/Products";
 import Certificates from "../components/sections/Certificates/Certificates";
 import Footer from "../components/layout/Footer";
 import Industrial from "../components/sections/Industrial/Industrial";
-import Reveal from "@/components/effects/Reveal";
 import ExportMap from "../components/sections/ExportMap";
 import Services from "@/components/sections/Services";
 import ReqestAds from "@/components/sections/ReqestAds";
 import StatsDivider from "@/components/sections/StatsDivider";
+import { LanguageProvider } from "@/components/providers/LanguageProvider";
 
 export default function Home() {
   return (
-    <>
+    <LanguageProvider>
+
       <Navbar />
 
       <Hero />
@@ -29,7 +30,7 @@ export default function Home() {
       <Products />
       <StatsDivider />
 
-      <Reveal><Services /></Reveal>
+      <Services />
       <StatsDivider />
 
       <ExportMap />
@@ -38,12 +39,13 @@ export default function Home() {
       <ReqestAds />
       <StatsDivider />
 
-      <Reveal><Industrial /></Reveal>
+      <Industrial />
       <StatsDivider />
 
-      <Reveal><Certificates /></Reveal>
+      <Certificates />
 
       <Footer />
-    </>
+
+    </LanguageProvider>
   );
 }
