@@ -1,97 +1,143 @@
 "use client";
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import Reveal from "@/components/effects/Reveal";
+import { useEffect, useRef, useState } from "react";
 
-export default function Impact() {
+/* =============================================
+   STAT CARD مع عداد متحرك
+============================================= */
+function StatCard({
+  value, suffix, title, color, delay, icon
+}: {
+  value: number; suffix: string; title: string;
+  color: string; delay: number; icon: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [count,   setCount]   = useState(0);
+  const [visible, setVisible] = useState(false);
+  const [started, setStarted] = useState(false);
 
-const { t } = useLanguage();
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          setTimeout(() => setStarted(true), delay);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [delay]);
 
-const stats = [
+  useEffect(() => {
+    if (!started) return;
+    const duration = 2200;
+    let startTime: number;
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const eased = 1 - Math.pow(2, -10 * progress); // easeOutExpo
+      setCount(Math.floor(eased * value));
+      if (progress < 1) requestAnimationFrame(step);
+      else setCount(value);
+    };
+    requestAnimationFrame(step);
+  }, [started, value]);
 
-{
-title: t.impact.production,
-value:"5K+",
-color:"text-blue-600"
-},
+  return (
+    <div
+      ref={ref}
+      className="relative p-10 rounded-[32px] border overflow-hidden
+        transition-all duration-700 hover:scale-[1.04] group"
+      style={{
+        backgroundColor: "var(--bg-card)",
+        borderColor: "var(--border)",
+        opacity:   visible ? 1 : 0,
+        transform: visible ? "translateY(0px)" : "translateY(50px)",
+        transitionDelay: `${delay}ms`,
+        boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+      }}
+    >
+      {/* glow عند hover */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ background: `radial-gradient(ellipse at 50% 0%, ${color}15 0%, transparent 65%)` }}/>
 
-{
-title: t.impact.export,
-value:"10+",
-color:"text-yellow-500"
-},
+      {/* خط علوي */}
+      <div className="absolute top-0 left-8 right-8 h-[2px] rounded-full transition-all duration-500"
+        style={{ background: `linear-gradient(to right, transparent, ${color}80, transparent)` }}/>
+      <div className="absolute top-0 left-8 right-8 h-[2px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ background: `linear-gradient(to right, transparent, ${color}, transparent)` }}/>
 
-{
-title: t.impact.sectors,
-value:"12+",
-color:"text-green-600"
+      {/* أيقونة */}
+      <div className="text-4xl mb-5">{icon}</div>
+
+      {/* العداد */}
+      <div className="flex items-end gap-0.5 mb-3">
+        <span className="text-6xl xl:text-7xl font-black leading-none tabular-nums"
+          style={{ color }}>
+          {value >= 1000 ? (count >= 1000 ? `${(count/1000).toFixed(1)}K` : count) : count}
+        </span>
+        <span className="text-4xl font-black mb-1" style={{ color }}>{suffix}</span>
+      </div>
+
+      {/* العنوان */}
+      <p className="text-base font-semibold leading-snug" style={{ color: "var(--text-soft)" }}>
+        {title}
+      </p>
+    </div>
+  );
 }
 
-];
+/* =============================================
+   IMPACT SECTION
+============================================= */
+export default function Impact() {
+  const { t, lang } = useLanguage();
+  const isAr = lang === "ar";
 
-return(
+  const stats = [
+    { value: 5000, suffix: "+", title: t.impact.production, color: "#60a5fa", delay: 0,   icon: "🏭" },
+    { value: 10,   suffix: "+", title: t.impact.export,     color: "#fbbf24", delay: 150, icon: "🌍" },
+    { value: 12,   suffix: "+", title: t.impact.sectors,    color: "#34d399", delay: 300, icon: "⚙️" },
+  ];
 
-<section className="relative py-40 overflow-hidden bg-[#f6f8fb]">
-<section className="industry-pattern py-40 bg-[#f6f8fb] text-slate-900 text-center relative overflow-hidden">
-{/* LIGHT INDUSTRIAL BACKGROUND */}
+  return (
+    <section className="industry-pattern relative py-36 overflow-hidden"
+      style={{ backgroundColor: "var(--bg-soft)" }}>
 
-<div className="absolute inset-0 pointer-events-none">
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: "linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px)",
+            backgroundSize: "80px 80px"
+          }}/>
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-[180px]"
+          style={{ background: "radial-gradient(ellipse, rgba(59,130,246,0.08), transparent 70%)" }}/>
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full blur-[150px]"
+          style={{ background: "radial-gradient(ellipse, rgba(251,191,36,0.06), transparent 70%)" }}/>
+      </div>
 
-<div className="absolute inset-0 opacity-30
-bg-[linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)]
-bg-[size:80px_80px]" />
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
 
-<div className="absolute top-0 left-0 w-[600px] h-[600px]
-bg-blue-400/20 blur-[200px]" />
+        {/* Header */}
+        <div className={`mb-20 ${isAr ? "text-right" : "text-left"}`}>
+          <span className="text-xs font-bold tracking-widest uppercase mb-3 block"
+            style={{ color: "var(--accent-gold)" }}>
+            {isAr ? "بالأرقام" : "By The Numbers"}
+          </span>
+          <h2 className="text-5xl xl:text-6xl font-black" style={{ color: "var(--text-main)" }}>
+            {t.impact.title}
+          </h2>
+        </div>
 
-</div>
+        {/* Cards */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {stats.map((s, i) => <StatCard key={i} {...s} />)}
+        </div>
 
-<div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-
-<Reveal>
-
-<h2 className="text-5xl font-black text-slate-900 mb-24">
-{t.impact.title}
-</h2>
-
-</Reveal>
-
-<div className="grid md:grid-cols-3 gap-12">
-
-{stats.map((s,i)=>(
-
-<Reveal key={i}>
-
-<div className="
-p-16 rounded-[40px]
-bg-white
-border border-gray-200
-shadow-sm
-transition duration-500
-hover:scale-[1.05]
-hover:shadow-xl
-hover:border-yellow-400/40
-">
-
-<h3 className={`text-6xl font-black mb-6 ${s.color}`}>
-{s.value}
-</h3>
-
-<p className="text-lg text-slate-600">
-{s.title}
-</p>
-
-</div>
-
-</Reveal>
-
-))}
-
-</div>
-
-</div>
-
-</section>
-</section>
-
-)
+      </div>
+    </section>
+  );
 }

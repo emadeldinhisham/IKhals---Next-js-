@@ -11,40 +11,48 @@ import Services from "@/components/sections/Services";
 import ReqestAds from "@/components/sections/ReqestAds";
 import StatsDivider from "@/components/sections/StatsDivider";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
+import LoadingScreen from "@/components/effects/LoadingScreen";
+import CustomCursor from "@/components/effects/CustomerCursor";
+import PageTransition from "@/components/effects/Pagetransition";
 
 export default function Home() {
   return (
     <LanguageProvider>
 
-      <Navbar />
+      <LoadingScreen />
+      <CustomCursor />
 
-      <Hero />
-      <StatsDivider />
+      <PageTransition>
+        <Navbar />
 
-      <About />
-      <StatsDivider />
+        <Hero />
+        <StatsDivider />
 
-      <Impact />
-      <StatsDivider />
+        <About />
+        <StatsDivider />
 
-      <Products />
-      <StatsDivider />
+        <Impact />
+        <StatsDivider />
 
-      <Services />
-      <StatsDivider />
+        <Products />
+        <StatsDivider />
 
-      <ExportMap />
-      <StatsDivider />
+        <Services />
+        <StatsDivider />
 
-      <ReqestAds />
-      <StatsDivider />
+        <ExportMap />
+        <StatsDivider />
 
-      <Industrial />
-      <StatsDivider />
+        <ReqestAds />
+        <StatsDivider />
 
-      <Certificates />
+        <Industrial />
+        <StatsDivider />
 
-      <Footer />
+        <Certificates />
+
+        <Footer />
+      </PageTransition>
 
     </LanguageProvider>
   );
