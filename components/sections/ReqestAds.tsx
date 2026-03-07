@@ -151,7 +151,7 @@ export default function QuoteRequest() {
   const labelClass = `block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5`;
 
   return (
-    <section className="relative py-24 bg-[var(--bg-main)] overflow-hidden">
+    <section id="request-ads" className="relative py-24 overflow-hidden" style={{ backgroundColor: "var(--bg-main)" }}>
 
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2

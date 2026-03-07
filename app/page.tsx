@@ -18,10 +18,8 @@ import PageTransition from "@/components/effects/Pagetransition";
 export default function Home() {
   return (
     <LanguageProvider>
-
       <LoadingScreen />
       <CustomCursor />
-
       <PageTransition>
         <Navbar />
 
@@ -35,7 +33,7 @@ export default function Home() {
         <StatsDivider />
 
         <Products />
-        <StatsDivider />
+        
 
         <Services />
         <StatsDivider />

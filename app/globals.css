@@ -38,10 +38,6 @@
 /* ===============================
    BASE
 ================================*/
-
-
-/* scroll-behavior moved to inline where needed only */
-
 body {
   background: var(--bg-main);
   color: var(--text-main);
@@ -53,18 +49,16 @@ body {
    DARK MODE OVERRIDES
 ================================*/
 
-/* Backgrounds - لا نضع override على section مباشرة لأنه يغطي الصور */
 .dark .bg-\[\#f6f8fb\],
 .dark .bg-\[\#f8fafc\] {
   background-color: var(--bg-soft) !important;
 }
 
-/* industry-pattern background handled by inline styles in each section */
-
 .dark .bg-\[var\(--bg-main\)\] {
   background-color: var(--bg-main) !important;
 }
 
+/* ⚠️ bg-white فقط على العناصر البسيطة — لا على الـ popup */
 .dark .bg-white {
   background-color: var(--bg-card) !important;
 }
@@ -98,7 +92,6 @@ body {
   border-color: rgba(255,255,255,0.1) !important;
   color: #e2e8f0 !important;
 }
-
 .dark input::placeholder,
 .dark textarea::placeholder {
   color: #4b5563 !important;
@@ -109,24 +102,21 @@ body {
 .dark .shadow-xl  { box-shadow: 0 10px 40px rgba(0,0,0,0.6) !important; }
 .dark .shadow-2xl { box-shadow: 0 20px 60px rgba(0,0,0,0.7) !important; }
 
-/* Cards — add dark glow effect */
-.dark .group:hover .absolute.top-0 {
-  opacity: 1 !important;
+/* Marquee */
+.dark .border-y,
+.dark .border-t,
+.dark .border-b {
+  border-color: rgba(255,255,255,0.07) !important;
 }
 
-/* Stat divider / marquee */
-.dark .border-yellow-400\/30 { border-color: rgba(251,191,36,0.2) !important; }
-.dark .bg-gradient-to-r.from-yellow-400 { opacity: 0.7; }
-
 /* ===============================
-   INDUSTRY PATTERN — ADAPTIVE
+   INDUSTRY PATTERN
 ================================*/
 .industry-pattern {
   position: relative;
   overflow: hidden;
 }
 
-/* Light mode pattern — dark lines */
 .industry-pattern::before {
   content: "";
   position: absolute;
@@ -142,7 +132,6 @@ body {
   background-repeat: repeat;
 }
 
-/* Dark mode pattern — white/blue lines */
 .dark .industry-pattern::before {
   opacity: 0.06;
   background-image:
@@ -153,82 +142,37 @@ body {
   background-repeat: repeat;
 }
 
-/* DARK GLOW — use inline divs per section instead */
-
-/* ===============================
-   DARK STAT DIVIDER / MARQUEE
-================================*/
-.dark .bg-gradient-to-r.from-slate-900,
-.dark [class*="from-slate-900"] {
-  background: linear-gradient(to right, #0a0f1e, #0f172a) !important;
-}
-
-/* فرض الخلفية الداكنة على شريط المارق */
-.dark .border-y,
-.dark .border-t,
-.dark .border-b {
-  border-color: rgba(255,255,255,0.07) !important;
-}
-
-/* ===============================
-   DARK CARD GLASS EFFECT
-================================*/
-.dark .bg-white.rounded-3xl,
-.dark .bg-white.rounded-2xl {
-  background: linear-gradient(135deg, #131c2e 0%, #1a2540 100%) !important;
-  border-color: rgba(255,255,255,0.07) !important;
-}
-
-/* ===============================
-   DARK STAT DIVIDER
-================================*/
-.dark .bg-gradient-to-r.from-slate-900 {
-  background: linear-gradient(to right, #0a0f1e, #0f172a) !important;
-}
-
 /* ===============================
    ANIMATIONS
 ================================*/
-@keyframes fade      { from{opacity:0} to{opacity:1} }
-@keyframes scaleIn   { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
-@keyframes slideUp   { from{transform:translateY(60px);opacity:0} to{transform:translateY(0);opacity:1} }
-@keyframes fadeUp    { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
-@keyframes fadeIn    { from{opacity:0} to{opacity:1} }
-@keyframes gradientMove {
-  0%  { background-position: 0% 50% }
-  50% { background-position: 100% 50% }
-  100%{ background-position: 0% 50% }
-}
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(37,99,235,0.3); }
-  50%       { box-shadow: 0 0 40px rgba(37,99,235,0.6); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-8px); }
-}
+@keyframes fade         { from{opacity:0} to{opacity:1} }
+@keyframes scaleIn      { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
+@keyframes slideUp      { from{transform:translateY(60px);opacity:0} to{transform:translateY(0);opacity:1} }
+@keyframes fadeUp       { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+@keyframes fadeIn       { from{opacity:0} to{opacity:1} }
+@keyframes gradientMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+@keyframes pulse-glow   { 0%,100%{box-shadow:0 0 20px rgba(37,99,235,0.3)} 50%{box-shadow:0 0 40px rgba(37,99,235,0.6)} }
+@keyframes float        { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-8px)} }
 
-.animate-fade      { animation: fade .3s ease }
-.animate-scale     { animation: scaleIn .3s ease }
-.animate-gradient  { background-size: 200% 200%; animation: gradientMove 6s ease infinite }
-.animate-fadeIn    { animation: fadeIn .5s ease forwards }
-.animate-slideUp   { animation: slideUp .7s ease forwards }
-.animate-fadeUp    { animation: fadeUp .6s ease forwards }
-.animate-pulse-glow{ animation: pulse-glow 3s ease-in-out infinite }
-.animate-float     { animation: float 4s ease-in-out infinite }
+.animate-fade       { animation: fade .3s ease }
+.animate-scale      { animation: scaleIn .3s ease }
+.animate-gradient   { background-size: 200% 200%; animation: gradientMove 6s ease infinite }
+.animate-fadeIn     { animation: fadeIn .5s ease forwards }
+.animate-slideUp    { animation: slideUp .7s ease forwards }
+.animate-fadeUp     { animation: fadeUp .6s ease forwards }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite }
+.animate-float      { animation: float 4s ease-in-out infinite }
 
 /* ===============================
    NAV LINK UNDERLINE
 ================================*/
 .nav-link { position: relative; transition: 0.3s; }
 .nav-link::after {
-  content: "";
-  position: absolute;
+  content: ""; position: absolute;
   left: 0; bottom: -6px;
   width: 0%; height: 2px;
   background: linear-gradient(to right, var(--accent-blue), var(--accent-gold));
-  border-radius: 99px;
-  transition: 0.3s;
+  border-radius: 99px; transition: 0.3s;
 }
 .nav-link:hover::after { width: 100%; }
 

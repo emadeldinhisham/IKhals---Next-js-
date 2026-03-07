@@ -321,7 +321,7 @@ export const translations = {
             {
               id: "bopp-laminated",
               title: "BOPP & Laminated Bags",
-              image: "/img/bopp.jpg",
+              image: "/img/bopp.jpg" ,
               features: [
                 "High quality vibrant color printing",
                 "BOPP or Laminated double protection layer",
