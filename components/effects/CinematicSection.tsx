@@ -3,8 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
-export default function CinematicSection({ children }) {
-
+export default function CinematicSection({ children }: { children: React.ReactNode }) {
   const { lang } = useLanguage();
   const glowRef = useRef(null);
 
