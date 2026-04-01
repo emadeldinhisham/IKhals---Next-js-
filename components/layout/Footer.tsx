@@ -175,7 +175,7 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100
                 flex items-center justify-center text-blue-600 shrink-0">📞</div>
-              <span>+20 10 0000 0000</span>
+              <span>+0201121220997</span>
             </div>
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100
