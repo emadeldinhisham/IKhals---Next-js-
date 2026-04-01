@@ -4,8 +4,7 @@ import { useEffect, useRef } from "react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function CinematicSection({ children }: { children: React.ReactNode }) {
-  const languageContext = useLanguage();
-  const lang = languageContext?.lang ?? "en";
+  const { lang } = useLanguage();
   const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
