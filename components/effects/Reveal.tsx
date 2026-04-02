@@ -2,52 +2,39 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function Reveal({ children }) {
+export default function Reveal({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
 
-  const ref = useRef(null);
-  const [visible,setVisible]=useState(false);
-
-  useEffect(()=>{
-
+  useEffect(() => {
     const observer = new IntersectionObserver(
-
-      ([entry])=>{
-        if(entry.isIntersecting){
+      ([entry]) => {
+        if (entry.isIntersecting) {
           setVisible(true);
         }
       },
-
-      {
-        threshold:0.15
-      }
-
+      { threshold: 0.15 }
     );
 
-    if(ref.current){
+    if (ref.current) {
       observer.observe(ref.current);
     }
 
-    return ()=>observer.disconnect();
+    return () => observer.disconnect();
+  }, []);
 
-  },[]);
-
-  return(
-
+  return (
     <div
       ref={ref}
       className={`
-      transition-all duration-1000 ease-out
-      ${visible
-        ? "opacity-100 translate-y-0 scale-100"
-        : "opacity-0 translate-y-24 scale-[0.96]"
-      }
+        transition-all duration-1000 ease-out
+        ${visible
+          ? "opacity-100 translate-y-0 scale-100"
+          : "opacity-0 translate-y-24 scale-[0.96]"
+        }
       `}
     >
-
       {children}
-
     </div>
-
-  )
-
+  );
 }
