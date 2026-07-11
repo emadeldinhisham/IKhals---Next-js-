@@ -113,7 +113,7 @@ export const translations = {
             {
               id: "bopp-laminated",
               title: "أكياس BOPP & Laminated",
-              image: "/img/bopp.jpg",
+              image: "/img/bopp.",
               features: [
                 "طباعة عالية الجودة بألوان زاهية",
                 "طبقة BOPP أو Laminated للحماية المزدوجة",

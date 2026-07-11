@@ -17,6 +17,8 @@ const EXPORT_COUNTRIES = [
   { nameAr: "سوريا",   nameEn: "Syria",   coords: [38.9968, 34.8021] as [number, number], id: "760" },
   { nameAr: "السودان", nameEn: "Sudan",   coords: [30.2176, 12.8628] as [number, number], id: "729" },
   { nameAr: "الأردن",  nameEn: "Jordan",  coords: [36.2384, 30.5852] as [number, number], id: "400" },
+  { nameAr: "المغرب",  nameEn: "Morocco", coords: [-7.0926, 31.7917] as [number, number], id: "504" },
+  { nameAr: "مصر",     nameEn: "Egypt",   coords: [30.8025, 26.8206] as [number, number], id: "818" },
 ];
 
 const HIGHLIGHTED_IDS = new Set(EXPORT_COUNTRIES.map((c) => c.id));
