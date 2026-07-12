@@ -106,37 +106,42 @@ export default function Footer() {
             {t.desc}
           </p>
 
-          {/* Social icons */}
-          <div className="mt-8 flex items-center gap-3">
-            {/* Instagram */}
-            <a href="#" className="w-9 h-9 rounded-lg bg-pink-50 border border-pink-100
-              flex items-center justify-center hover:bg-pink-100 hover:scale-110
-              transition-all duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e1306c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                <circle cx="12" cy="12" r="4"/>
-                <circle cx="17.5" cy="6.5" r="1" fill="#e1306c" stroke="none"/>
-              </svg>
-            </a>
-            {/* Facebook */}
-            <a href="#" className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100
-              flex items-center justify-center hover:bg-blue-100 hover:scale-110
-              transition-all duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1877f2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-              </svg>
-            </a>
-            {/* LinkedIn */}
-            <a href="#" className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-100
-              flex items-center justify-center hover:bg-sky-100 hover:scale-110
-              transition-all duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0077b5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                <rect x="2" y="9" width="4" height="12"/>
-                <circle cx="4" cy="4" r="2"/>
-              </svg>
-            </a>
-          </div>
+         {/* Social icons */}
+<div className="mt-8 flex items-center gap-3">
+  {/* Instagram */}
+  <a href="https://www.instagram.com/alikhlas.company/" target="_blank" rel="noopener noreferrer"
+    className="w-9 h-9 rounded-lg bg-pink-50 border border-pink-100
+      flex items-center justify-center hover:bg-pink-100 hover:scale-110
+      transition-all duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e1306c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="17.5" cy="6.5" r="1" fill="#e1306c" stroke="none"/>
+    </svg>
+  </a>
+
+  {/* Facebook */}
+  <a href="https://www.facebook.com/profile.php?id=100086002390894" target="_blank" rel="noopener noreferrer"
+    className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100
+      flex items-center justify-center hover:bg-blue-100 hover:scale-110
+      transition-all duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1877f2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+    </svg>
+  </a>
+
+  {/* LinkedIn */}
+  <a href="https://www.linkedin.com/company/al-ikhlas-for-plastic-industries-%D8%B4%D8%B1%D9%83%D8%A9-%D8%A7%D9%84%D8%A5%D8%AE%D9%84%D8%A7%D8%B5-%D9%84%D9%84%D8%B5%D9%86%D8%A7%D8%B9%D8%A7%D8%AA-%D8%A7%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%D9%8A%D8%A9/posts/?feedView=all" target="_blank" rel="noopener noreferrer"
+    className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-100
+      flex items-center justify-center hover:bg-sky-100 hover:scale-110
+      transition-all duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0077b5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+      <rect x="2" y="9" width="4" height="12"/>
+      <circle cx="4" cy="4" r="2"/>
+    </svg>
+  </a>
+</div>
         </div>
 
         {/* Quick Links */}
@@ -175,7 +180,7 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100
                 flex items-center justify-center text-blue-600 shrink-0">📞</div>
-              <span>+0201121220997</span>
+              <span>0201121220997+</span>
             </div>
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100
@@ -184,7 +189,7 @@ export default function Footer() {
             </div>
           </div>
           <a
-            href="https://wa.me/201000000000"
+            href="https://wa.me/201028351080"
             className="mt-8 inline-flex items-center gap-2
               bg-green-500 hover:bg-green-600 text-white
               px-6 py-3 rounded-xl font-bold text-sm

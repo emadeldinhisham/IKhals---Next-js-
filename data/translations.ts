@@ -58,7 +58,7 @@ export const translations = {
             {
               id: "plain-roll",
               title: "رول سادة",
-              image: "/img/rolls.jpg",
+              image: "/img/plain-roll.png",
               features: [
                 "نسيج بولي بروبلين نقي",
                 "مقاومة عالية للشد والضغط",
@@ -72,9 +72,9 @@ export const translations = {
               ],
             },
             {
-              id: "coated-roll",
+              id: "laminated-roll",
               title: "رول مطلي",
-              image: "/img/rolls.jpg",
+              image: "/img/laminated-roll.png",
               features: [
                 "طبقة BOPP أو PE للحماية الفائقة",
                 "مقاومة ممتازة للرطوبة والماء",
@@ -88,9 +88,9 @@ export const translations = {
               ],
             },
             {
-              id: "laminated-roll",
-              title: "رول مشروح",
-              image: "/img/rolls.jpg",
+              id: "printed-roll",
+              title: "رول مطبوع",
+              image: "/img/printed-roll.png",
               features: [
                 "طبقات متعددة مدمجة معاً",
                 "قوة تحمل فائقة للأحمال الثقيلة",
@@ -113,7 +113,7 @@ export const translations = {
             {
               id: "bopp-laminated",
               title: "أكياس BOPP & Laminated",
-              image: "/img/bopp.",
+              image: "/img/bopp.jpg",
               features: [
                 "طباعة عالية الجودة بألوان زاهية",
                 "طبقة BOPP أو Laminated للحماية المزدوجة",
@@ -261,7 +261,7 @@ export const translations = {
         {
           id: "woven-rolls",
           title: "Woven Rolls",
-          image: "/img/rolls.jpg",
+          image: "/img/plain-roll.png",
           children: [
             {
               id: "plain-roll",
@@ -280,9 +280,9 @@ export const translations = {
               ],
             },
             {
-              id: "coated-roll",
-              title: "Coated Roll",
-              image: "/img/rolls.jpg",
+              id: "laminated-roll-roll",
+              title: "Laminated Roll",
+              image: "/img/laminated-roll.png",
               features: [
                 "BOPP or PE coating for superior protection",
                 "Excellent moisture and water resistance",
@@ -296,9 +296,9 @@ export const translations = {
               ],
             },
             {
-              id: "laminated-roll",
-              title: "Laminated Roll",
-              image: "/img/rolls.jpg",
+              id: "printed-roll",
+              title: "Printed Roll",
+              image: "/img/printed-roll.png",
               features: [
                 "Multiple integrated layers bonded together",
                 "Superior load bearing strength for heavy loads",
