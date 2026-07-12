@@ -266,7 +266,7 @@ export const translations = {
             {
               id: "plain-roll",
               title: "Plain Roll",
-              image: "/img/rolls.jpg",
+              image: "/img/plain-roll.png",
               features: [
                 "Pure polypropylene fabric",
                 "High tensile and pressure resistance",
