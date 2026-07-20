@@ -6,9 +6,9 @@ import emailjs from "@emailjs/browser";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 // ⚠️ حط القيم دي من داشبورد EmailJS بتاعك
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = "service_3h61ej1";
+const EMAILJS_TEMPLATE_ID = "template_38lsrg9";
+const EMAILJS_PUBLIC_KEY = "Hxt1ORdZ3xjJ19xXc";
 
 export default function Footer() {
 
