@@ -7,7 +7,7 @@ export const translations = {
       badge: "الريادة في صناعة البلاستيك ✨",
       title: "الإخلاص",
       subtitle: "للصناعات البلاستيكية",
-      desc: "في شركة الإخلاص، نفخر بإنتاج أجود أنواع الأكياس التي تتميز بالمتانة والقابلية لإعادة التدوير في صناعة اللدائن. تُصنع أكياسنا من مواد بوليمرية عالية الجودة، مما يجعلها قادرة على تحمل مختلف الظروف البيئية، فضلاً عن إمكانية إعادة استخدامها أو تدويرها بعد",
+      desc: "تأسست شركة الإخلاص للصناعات البلاستيكية عام 2013، وأصبحت واحدة من الشركات الرائدة في تصنيع أكياس ورولات المنسوجات من البولي بروبلين (PP) في منطقة الشرق الأوسط. نُصنّع أكياساً صناعية عالية الجودة وفقاً لمعايير عالمية، وقادرة على تحمل أقسى الظروف البيئية.",
       cta1: "اكتشف منتجاتنا",
       cta2: "تواصل معنا",
     },
@@ -26,8 +26,8 @@ export const translations = {
     about: {
       title: "الإخلاص للصناعات البلاستيكية",
       paragraphs: [
-        "في شركة الإخلاص للصناعات البلاستيكية، نفخر بإنتاج مجموعة من أجود الأكياس الصناعية المتينة والقابلة لإعادة التدوير.",
-        "منتجاتنا مصنوعة من مواد بوليمر عالية الجودة قادرة على تحمل أقسى الظروف البيئية.",
+        "في شركة الإخلاص، نفخر بإنتاج بعض من أجود الأكياس البلاستيكية المتينة والقابلة لإعادة التدوير في صناعة اللدائن.",
+        "تُصنع أكياسنا من مواد بوليمرية عالية الجودة قادرة على تحمل مختلف الظروف البيئية، ويمكن إعادة استخدامها أو تدويرها بعد الاستخدام.",
       ],
       valuesTitle: "قيمنا",
       valuesText: "تُعد شركة الاخلاص رائداً معترفاً به في مجالي الابتكار والجودة، حيث نقدم حلولاً بلاستيكية شاملة ومخصصة تم تصميمها بدقة لتلبي الاحتياجات المحددة لصناعتكم. نحن ملتزمون بأن نكون شريككم المفضل عبر تقديم قيمة استثنائية تفوق التوقعات.",
@@ -215,7 +215,7 @@ export const translations = {
       badge: "Leading Plastic Industry ✨",
       title: "Al Ikhlas",
       subtitle: "For Plastic Industries",
-      desc: "At Al-Ikhlas, we are proud to produce some of the finest, durable, and recyclable bags in the plastic industry. Our bags are made of high-quality polymer materials that can withstand various environmental conditions and can be reused or recycled after use.",
+      desc: "Founded in 2013, Al-Ikhlas for Plastic Industries has emerged as a leading manufacturer of Woven Polypropylene (PP) Bags and Rolls in the Middle East. We manufacture high-quality industrial bags designed for global standards and withstand the harshest environmental conditions.",
       cta1: "Explore Products",
       cta2: "Contact Us",
     },
@@ -234,8 +234,8 @@ export const translations = {
     about: {
       title: "Al Ikhlas For Plastic Industries",
       paragraphs: [
-        "Founded in 2013, Al-Ikhlas for Plastic Industries has emerged as a leading manufacturer of Woven Polypropylene (PP) Bags and Rolls in the Middle East.",
-        "We manufacture high-quality industrial bags designed for global standards and withstand the harshest environmental conditions.",
+        "At Al-Ikhlas, we are proud to produce some of the finest, durable, and recyclable bags in the plastic industry.",
+        "Our bags are made of high-quality polymer materials that can withstand various environmental conditions and can be reused or recycled after use.",
       ],
       valuesTitle: "Our Values",
       valuesText: "Al-Ikhlas, a recognized leader in innovation and quality, offers comprehensive and customized plastic solutions tailored to your specific industry needs. We are committed to becoming your preferred partner and delivering exceptional value that exceeds expectations.",

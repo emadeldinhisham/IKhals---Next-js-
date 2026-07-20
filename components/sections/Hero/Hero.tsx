@@ -215,7 +215,7 @@ export default function Hero() {
                   style={{ background: "radial-gradient(ellipse at 30% 30%, rgba(99,102,241,0.2), transparent 60%)" }}/>
                 <h3 className="text-5xl font-black leading-none relative z-10"
                   style={{ background: "linear-gradient(135deg, #60a5fa, #818cf8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  30
+                  50
                 </h3>
                 <p className="text-xs font-semibold mt-1 leading-tight relative z-10" style={{ color: "#94a3b8" }}>
                   {isAr ? "سنة خبرة" : "Years of Experience"}
