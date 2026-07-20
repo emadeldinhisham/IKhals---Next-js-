@@ -221,7 +221,7 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100
                 flex items-center justify-center text-blue-600 shrink-0">✉</div>
-              <span>info@ikhlas.com</span>
+              <span>info@ikhlas-co.com</span>
             </div>
           </div>
           <a
