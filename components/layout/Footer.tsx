@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import emailjs from "@emailjs/browser";
 import { useLanguage } from "@/components/providers/LanguageProvider";
+
+// ⚠️ حط القيم دي من داشبورد EmailJS بتاعك
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 
 export default function Footer() {
 
@@ -10,6 +16,8 @@ export default function Footer() {
   const isAr = lang === "ar";
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
 
   const content = {
     ar: {
@@ -26,7 +34,9 @@ export default function Footer() {
         email: "البريد الإلكتروني",
         message: "رسالتك",
         send: "إرسال الرسالة",
-        sent: "✓ تم الإرسال بنجاح!"
+        sending: "جاري الإرسال...",
+        sent: "✓ تم الإرسال بنجاح!",
+        error: "حدث خطأ، حاول مرة أخرى"
       },
       links: [
         { label: "الرئيسية",   link: "#top"          },
@@ -50,7 +60,9 @@ export default function Footer() {
         email: "Email Address",
         message: "Your Message",
         send: "Send Message",
-        sent: "✓ Sent Successfully!"
+        sending: "Sending...",
+        sent: "✓ Sent Successfully!",
+        error: "Something went wrong, try again"
       },
       links: [
         { label: "Home",         link: "#top"          },
@@ -64,11 +76,35 @@ export default function Footer() {
 
   const t = content[lang];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setForm({ name: "", email: "", message: "" });
-    setTimeout(() => setSent(false), 4000);
+    setSending(true);
+    setError(false);
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+
+      setSent(true);
+      setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setSent(false), 4000);
+    } catch (err: any) {
+      console.error("EmailJS error status:", err?.status);
+      console.error("EmailJS error text:", err?.text);
+      console.error("EmailJS error full:", JSON.stringify(err));
+      setError(true);
+      setTimeout(() => setError(false), 4000);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -243,12 +279,13 @@ export default function Footer() {
             />
             <button
               type="submit"
+              disabled={sending}
               className="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500
                 text-white font-bold text-sm
                 hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-200
-                transition-all duration-300"
+                transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
-              {sent ? t.form.sent : t.form.send}
+              {error ? t.form.error : sent ? t.form.sent : sending ? t.form.sending : t.form.send}
             </button>
           </form>
         </div>
