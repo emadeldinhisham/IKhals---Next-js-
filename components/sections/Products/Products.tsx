@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { X, ChevronLeft, ChevronRight, CheckCircle, Ruler } from "lucide-react";
 
 /* ══════════════════════════════════════════
-   SVG FALLBACKS
+   SVG FALLBACKS (unchanged — same as your original)
 ══════════════════════════════════════════ */
 function RollSVG({ hovered }: { hovered?: boolean }) {
   return (
@@ -160,7 +161,7 @@ function cardBg(id: string) {
 }
 
 /* ══════════════════════════════════════════
-   PRELOAD IMAGES — يحمل الصور مسبقاً
+   PRELOAD IMAGES
 ══════════════════════════════════════════ */
 function usePreloadImages(srcs: string[]) {
   useEffect(() => {
@@ -173,25 +174,25 @@ function usePreloadImages(srcs: string[]) {
 }
 
 /* ══════════════════════════════════════════
-   CARD IMAGE — صورة مع skeleton loader
+   CARD IMAGE — صورة مع skeleton + shared layout id
+   (layoutId هو سر الـ "magic move" مع البوب أب)
 ══════════════════════════════════════════ */
 function CardImage({ src, alt, id, hovered, priority }: { src:string; alt:string; id:string; hovered:boolean; priority?:boolean }) {
-  const [error,   setError]   = useState(false);
-  const [loaded,  setLoaded]  = useState(false);
+  const [error,  setError]  = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   if (error || !src) {
     return (
-      <div className="w-full h-full flex items-center justify-center p-6" style={{ background: cardBg(id) }}>
+      <motion.div layoutId={`product-image-${id}`} className="w-full h-full flex items-center justify-center p-6" style={{ background: cardBg(id) }}>
         <div style={{ width:"80%", maxWidth:"200px" }}>
           <ProductSVG id={id} hovered={hovered}/>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div className="w-full h-full relative overflow-hidden">
-      {/* Skeleton shimmer — يختفي بعد تحميل الصورة */}
+    <motion.div layoutId={`product-image-${id}`} className="w-full h-full relative overflow-hidden">
       {!loaded && (
         <div className="absolute inset-0 z-10" style={{ background: cardBg(id) }}>
           <div style={{
@@ -200,7 +201,6 @@ function CardImage({ src, alt, id, hovered, priority }: { src:string; alt:string
             backgroundSize: "200% 100%",
             animation: "shimmer 1.4s infinite",
           }}/>
-          {/* SVG placeholder أثناء التحميل */}
           <div className="absolute inset-0 flex items-center justify-center p-8 opacity-40">
             <div style={{ width:"70%", maxWidth:"170px" }}>
               <ProductSVG id={id}/>
@@ -208,25 +208,28 @@ function CardImage({ src, alt, id, hovered, priority }: { src:string; alt:string
           </div>
         </div>
       )}
-      <Image
-        src={src} alt={alt} fill
-        priority={priority}
-        sizes="(max-width:768px) 100vw, (max-width:1200px) 33vw, 400px"
-        className="object-cover"
-        style={{
-          transition: loaded ? "transform 0.6s cubic-bezier(0.4,0,0.2,1)" : "none",
-          transform: hovered ? "scale(1.1)" : "scale(1)",
-          opacity: loaded ? 1 : 0,
-        }}
-        onLoad={()=>setLoaded(true)}
-        onError={()=>setError(true)}
+      <motion.div
+        className="w-full h-full relative"
+        animate={{ scale: hovered ? 1.1 : 1 }}
+        transition={{ type: "spring", stiffness: 260, damping: 24 }}
+      >
+        <Image
+          src={src} alt={alt} fill
+          priority={priority}
+          sizes="(max-width:768px) 100vw, (max-width:1200px) 33vw, 400px"
+          className="object-cover"
+          style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.4s" }}
+          onLoad={()=>setLoaded(true)}
+          onError={()=>setError(true)}
+        />
+      </motion.div>
+      <motion.div className="absolute inset-0"
+        style={{ background:"linear-gradient(to top,rgba(10,15,30,0.55) 0%,transparent 50%)", pointerEvents:"none" }}
+        animate={{ opacity: loaded ? (hovered ? 1 : 0.4) : 0 }}
+        transition={{ duration: 0.4 }}
       />
-      {loaded && (
-        <div className="absolute inset-0"
-          style={{ background:"linear-gradient(to top,rgba(10,15,30,0.55) 0%,transparent 50%)", opacity:hovered?1:0.4, transition:"opacity 0.4s" }}/>
-      )}
       <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
-    </div>
+    </motion.div>
   );
 }
 
@@ -237,38 +240,45 @@ function PopupImage({ src, alt, id }: { src:string; alt:string; id:string }) {
 
   if (error || !src) {
     return (
-      <div style={{ minHeight:"420px", borderRadius:"32px 0 0 32px", background:cardBg(id), display:"flex", alignItems:"center", justifyContent:"center", padding:"40px" }}>
+      <motion.div layoutId={`product-image-${id}`} style={{ minHeight:"420px", borderRadius:"32px 0 0 32px", background:cardBg(id), display:"flex", alignItems:"center", justifyContent:"center", padding:"40px" }}>
         <div style={{ width:"100%", maxWidth:"260px" }}><ProductSVG id={id} hovered={ph}/></div>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div style={{ position:"relative", minHeight:"420px", borderRadius:"32px 0 0 32px", overflow:"hidden", cursor:"pointer", background:cardBg(id) }}
+    <motion.div layoutId={`product-image-${id}`}
+      style={{ position:"relative", minHeight:"420px", borderRadius:"32px 0 0 32px", overflow:"hidden", cursor:"pointer", background:cardBg(id) }}
       onMouseEnter={()=>setPh(true)} onMouseLeave={()=>setPh(false)}>
       {!loaded && (
         <div className="absolute inset-0 z-10 flex items-center justify-center p-12 opacity-50">
           <div style={{ width:"70%", maxWidth:"240px" }}><ProductSVG id={id}/></div>
         </div>
       )}
-      <Image
-        src={src} alt={alt} fill
-        priority
-        sizes="450px"
-        className="object-cover"
-        style={{ transition:"transform 0.6s ease", transform:ph?"scale(1.06)":"scale(1)", opacity:loaded?1:0 }}
-        onLoad={()=>setLoaded(true)}
-        onError={()=>setError(true)}
-      />
+      <motion.div
+        className="w-full h-full relative"
+        animate={{ scale: ph ? 1.06 : 1 }}
+        transition={{ type: "spring", stiffness: 220, damping: 22 }}
+      >
+        <Image
+          src={src} alt={alt} fill
+          priority
+          sizes="450px"
+          className="object-cover"
+          style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.4s" }}
+          onLoad={()=>setLoaded(true)}
+          onError={()=>setError(true)}
+        />
+      </motion.div>
       {loaded && (
         <div style={{ position:"absolute", inset:0, background:"linear-gradient(to top,rgba(10,15,30,0.45),transparent)", pointerEvents:"none" }}/>
       )}
-    </div>
+    </motion.div>
   );
 }
 
 /* ══════════════════════════════════════════
-   POPUP
+   POPUP — دخول/خروج سينمائي + magic move من الكارد
 ══════════════════════════════════════════ */
 function ProductPopup({ selectedId, onClose, isAr, t }: { selectedId:string; onClose:()=>void; isAr:boolean; t:any }) {
   const allItems: any[] = [];
@@ -284,64 +294,95 @@ function ProductPopup({ selectedId, onClose, isAr, t }: { selectedId:string; onC
     return () => { document.body.style.overflow = ""; };
   }, []);
 
+  const listStagger = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.06, delayChildren: 0.15 } },
+  };
+  const listItem = {
+    hidden: { opacity: 0, x: isAr ? 12 : -12 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  };
+
   return createPortal(
-    <div style={{ position:"fixed",inset:0,zIndex:999999,backgroundColor:"rgba(0,0,0,0.82)",backdropFilter:"blur(12px)",display:"flex",alignItems:"center",justifyContent:"center",padding:"24px" }}
-      onClick={(e)=>{ if(e.target===e.currentTarget) onClose(); }}>
-      <div style={{ position:"relative",width:"100%",maxWidth:"900px",maxHeight:"90vh",overflowY:"auto",borderRadius:"32px",backgroundColor:"var(--bg-card)",border:"1px solid var(--border)",boxShadow:"0 40px 100px rgba(0,0,0,0.7)" }}>
+    <motion.div
+      style={{ position:"fixed",inset:0,zIndex:999999,backgroundColor:"rgba(0,0,0,0.82)",backdropFilter:"blur(12px)",display:"flex",alignItems:"center",justifyContent:"center",padding:"24px" }}
+      onClick={(e)=>{ if(e.target===e.currentTarget) onClose(); }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+    >
+      <motion.div
+        style={{ position:"relative",width:"100%",maxWidth:"900px",maxHeight:"90vh",overflowY:"auto",borderRadius:"32px",backgroundColor:"var(--bg-card)",border:"1px solid var(--border)",boxShadow:"0 40px 100px rgba(0,0,0,0.7)" }}
+        initial={{ opacity: 0, scale: 0.94, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96, y: 10 }}
+        transition={{ type: "spring", stiffness: 300, damping: 28 }}
+      >
         <button onClick={onClose} style={{ position:"absolute",top:"16px",right:"16px",zIndex:10,width:"40px",height:"40px",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",backgroundColor:"var(--bg-card2)",color:"var(--text-soft)",border:"none",cursor:"pointer" }}>
           <X size={18}/>
         </button>
         <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr" }}>
           <PopupImage src={selected.image} alt={selected.title} id={selected.id}/>
-          <div style={{ padding:"40px",textAlign:isAr?"right":"left",direction:isAr?"rtl":"ltr" }}>
+          <motion.div
+            style={{ padding:"40px",textAlign:isAr?"right":"left",direction:isAr?"rtl":"ltr" }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.35 }}
+          >
             <span style={{ fontSize:"11px",fontWeight:800,letterSpacing:"0.1em",textTransform:"uppercase",color:"var(--accent-gold)" }}>
               {isAr?"تفاصيل المنتج":"Product Details"}
             </span>
             <h2 style={{ fontSize:"28px",fontWeight:900,marginTop:"8px",marginBottom:"24px",color:"var(--text-main)" }}>{selected.title}</h2>
+
             {selected.features?.length>0 && (
               <div style={{ marginBottom:"24px" }}>
                 <div style={{ display:"flex",alignItems:"center",gap:"8px",marginBottom:"12px",flexDirection:isAr?"row-reverse":"row" }}>
                   <CheckCircle size={18} style={{ color:"var(--accent-blue)",flexShrink:0 }}/>
                   <span style={{ fontSize:"12px",fontWeight:800,textTransform:"uppercase",letterSpacing:"0.08em",color:"var(--text-main)" }}>{isAr?"المميزات":"Features"}</span>
                 </div>
-                <ul style={{ listStyle:"none",padding:0,margin:0,display:"flex",flexDirection:"column",gap:"10px" }}>
+                <motion.ul variants={listStagger} initial="hidden" animate="show" style={{ listStyle:"none",padding:0,margin:0,display:"flex",flexDirection:"column",gap:"10px" }}>
                   {selected.features.map((f:string,i:number)=>(
-                    <li key={i} style={{ display:"flex",alignItems:"flex-start",gap:"10px",flexDirection:isAr?"row-reverse":"row" }}>
+                    <motion.li key={i} variants={listItem} style={{ display:"flex",alignItems:"flex-start",gap:"10px",flexDirection:isAr?"row-reverse":"row" }}>
                       <span style={{ width:"18px",height:"18px",borderRadius:"50%",flexShrink:0,marginTop:"2px",backgroundColor:"var(--bg-card2)",display:"flex",alignItems:"center",justifyContent:"center" }}>
                         <span style={{ width:"6px",height:"6px",borderRadius:"50%",backgroundColor:"var(--accent-blue)",display:"block" }}/>
                       </span>
                       <span style={{ fontSize:"14px",lineHeight:1.6,color:"var(--text-soft)" }}>{f}</span>
-                    </li>
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               </div>
             )}
+
             {selected.specs?.length>0 && (
               <div style={{ marginBottom:"24px" }}>
                 <div style={{ display:"flex",alignItems:"center",gap:"8px",marginBottom:"12px",flexDirection:isAr?"row-reverse":"row" }}>
                   <Ruler size={18} style={{ color:"var(--accent-gold)",flexShrink:0 }}/>
                   <span style={{ fontSize:"12px",fontWeight:800,textTransform:"uppercase",letterSpacing:"0.08em",color:"var(--text-main)" }}>{isAr?"المواصفات":"Specifications"}</span>
                 </div>
-                <ul style={{ listStyle:"none",padding:0,margin:0,display:"flex",flexDirection:"column",gap:"10px" }}>
+                <motion.ul variants={listStagger} initial="hidden" animate="show" style={{ listStyle:"none",padding:0,margin:0,display:"flex",flexDirection:"column",gap:"10px" }}>
                   {selected.specs.map((s:string,i:number)=>(
-                    <li key={i} style={{ display:"flex",alignItems:"flex-start",gap:"10px",flexDirection:isAr?"row-reverse":"row" }}>
+                    <motion.li key={i} variants={listItem} style={{ display:"flex",alignItems:"flex-start",gap:"10px",flexDirection:isAr?"row-reverse":"row" }}>
                       <span style={{ width:"18px",height:"18px",borderRadius:"50%",flexShrink:0,marginTop:"2px",backgroundColor:"var(--bg-card2)",display:"flex",alignItems:"center",justifyContent:"center" }}>
                         <span style={{ width:"6px",height:"6px",borderRadius:"50%",backgroundColor:"var(--accent-gold)",display:"block" }}/>
                       </span>
                       <span style={{ fontSize:"14px",lineHeight:1.6,color:"var(--text-soft)" }}>{s}</span>
-                    </li>
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               </div>
             )}
-            <a href="#request-ads" onClick={onClose}
+
+            <motion.a href="#request-ads" onClick={onClose}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               style={{ display:"flex",alignItems:"center",justifyContent:"center",gap:"8px",width:"100%",padding:"14px",borderRadius:"16px",background:"linear-gradient(135deg,#3b82f6,#6366f1)",color:"#fff",fontWeight:700,fontSize:"15px",textDecoration:"none",boxShadow:"0 8px 24px rgba(99,102,241,0.35)" }}>
               {isAr?"🚀 صمم طلبيتك":"🚀 Design Your Order"}
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
-      </div>
-    </div>,
+      </motion.div>
+    </motion.div>,
     document.body
   );
 }
@@ -361,7 +402,6 @@ export default function Products() {
 
   useEffect(()=>{ setMounted(true); },[]);
 
-  // جمع كل مسارات الصور لـ preload
   const allImageSrcs = products.flatMap((p: any) =>
     p.children ? p.children.map((c: any) => c.image) : [p.image]
   );
@@ -369,6 +409,15 @@ export default function Products() {
 
   const active = products.find((p:any)=>p.id===activeId) || products[0];
   const cards  = active.children ? active.children : [active];
+
+  const gridVariants = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.1 } },
+  };
+  const cardVariants = {
+    hidden: { opacity: 0, y: 32, scale: 0.96 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 260, damping: 24 } },
+  };
 
   return (
     <section id="products" className="industry-pattern relative pt-10 pb-24 overflow-hidden"
@@ -380,69 +429,104 @@ export default function Products() {
         style={{ background:"radial-gradient(ellipse,rgba(251,191,36,0.06),transparent)" }}/>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12">
+        <motion.div className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.5 }}
+        >
           <span className="text-yellow-500 text-sm tracking-widest uppercase font-semibold">{isAr?"تشكيلتنا":"Our Collection"}</span>
           <h2 className="mt-3 text-4xl md:text-5xl font-black" style={{ color:"var(--text-main)" }}>{t.products.title}</h2>
           <div className="mt-4 w-20 h-1 bg-gradient-to-r from-blue-500 to-yellow-400 rounded-full mx-auto"/>
-        </div>
+        </motion.div>
 
-        {/* TABS */}
+        {/* TABS — مؤشر متحرك بدل تبديل فجائي */}
         <div className="flex justify-center gap-3 mb-12 flex-wrap">
           {products.map((p:any)=>(
             <button key={p.id} onClick={()=>setActiveId(p.id)}
-              className="px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-300"
-              style={activeId===p.id
-                ?{ background:"linear-gradient(135deg,#3b82f6,#6366f1)",color:"#fff",boxShadow:"0 8px 24px rgba(99,102,241,0.3)",transform:"scale(1.05)" }
-                :{ backgroundColor:"var(--bg-card)",color:"var(--text-soft)",border:"1px solid var(--border)" }}>
-              {p.title}
+              className="relative px-6 py-3 rounded-2xl text-sm font-bold"
+              style={{ color: activeId===p.id ? "#fff" : "var(--text-soft)", border: activeId===p.id ? "none" : "1px solid var(--border)" }}>
+              {activeId===p.id && (
+                <motion.span
+                  layoutId="tabPill"
+                  className="absolute inset-0 rounded-2xl"
+                  style={{ background:"linear-gradient(135deg,#3b82f6,#6366f1)", boxShadow:"0 8px 24px rgba(99,102,241,0.3)" }}
+                  transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                />
+              )}
+              <span className="relative z-10">{p.title}</span>
             </button>
           ))}
         </div>
 
-        {/* CARDS */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {cards.map((c:any, i:number)=>{
-            const isHov = hoveredIdx===i;
-            return (
-              <div key={c.id}
-                className="rounded-3xl overflow-hidden cursor-pointer"
-                style={{ backgroundColor:"var(--bg-card)",border:"1px solid var(--border)",boxShadow:isHov?"0 24px 64px rgba(0,0,0,0.22)":"0 4px 24px rgba(0,0,0,0.06)",transform:isHov?"translateY(-10px)":"translateY(0)",transition:"all 0.4s cubic-bezier(0.34,1.56,0.64,1)" }}
-                onMouseEnter={()=>setHoveredIdx(i)}
-                onMouseLeave={()=>setHoveredIdx(null)}
-                onClick={()=>setSelectedId(c.id)}>
+        {/* CARDS — دخول متتابع + تبديل ناعم عند تغيير التاب */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeId}
+            className="grid md:grid-cols-3 gap-8"
+            variants={gridVariants}
+            initial="hidden"
+            animate="show"
+            exit={{ opacity: 0, transition: { duration: 0.15 } }}
+          >
+            {cards.map((c:any, i:number)=>{
+              const isHov = hoveredIdx===i;
+              return (
+                <motion.div key={c.id}
+                  variants={cardVariants}
+                  layout
+                  className="rounded-3xl overflow-hidden cursor-pointer"
+                  style={{ backgroundColor:"var(--bg-card)",border:"1px solid var(--border)" }}
+                  animate={{
+                    y: isHov ? -10 : 0,
+                    boxShadow: isHov ? "0 24px 64px rgba(0,0,0,0.22)" : "0 4px 24px rgba(0,0,0,0.06)",
+                  }}
+                  transition={{ type: "spring", stiffness: 300, damping: 26 }}
+                  onMouseEnter={()=>setHoveredIdx(i)}
+                  onMouseLeave={()=>setHoveredIdx(null)}
+                  onClick={()=>setSelectedId(c.id)}>
 
-                <div className="relative h-[260px] overflow-hidden">
-                  {/* priority=true للكارد الأول فقط */}
-                  <CardImage src={c.image} alt={c.title} id={c.id} hovered={isHov} priority={i === 0}/>
-                  <div style={{ position:"absolute",inset:0,display:"flex",alignItems:"flex-end",justifyContent:"center",paddingBottom:"20px",pointerEvents:"none" }}>
-                    <span style={{ backgroundColor:"#fff",color:"#2563eb",fontWeight:700,fontSize:"13px",padding:"8px 24px",borderRadius:"12px",boxShadow:"0 4px 16px rgba(0,0,0,0.3)",transform:isHov?"translateY(0)":"translateY(20px)",opacity:isHov?1:0,transition:"transform 0.35s,opacity 0.35s" }}>
-                      {t.products.details}
-                    </span>
-                  </div>
-                </div>
-
-                <div className={`p-6 ${isAr?"text-right":"text-left"}`}>
-                  <h3 className="text-lg font-black mb-3" style={{ color:"var(--text-main)" }}>{c.title}</h3>
-                  <div className="flex items-center justify-between">
-                    <span className="flex items-center gap-2 font-bold text-sm" style={{ color:"var(--accent-blue)" }}>
-                      {isAr?"التفاصيل":"Details"}
-                      {isAr?<ChevronLeft className="w-4 h-4"/>:<ChevronRight className="w-4 h-4"/>}
-                    </span>
-                    <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-                      style={{ backgroundColor:"var(--bg-card2)",transform:isHov?"rotate(45deg)":"rotate(0)",transition:"transform 0.3s" }}>
-                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor:"var(--accent-blue)" }}/>
+                  <div className="relative h-[260px] overflow-hidden">
+                    <CardImage src={c.image} alt={c.title} id={c.id} hovered={isHov} priority={i === 0}/>
+                    <div style={{ position:"absolute",inset:0,display:"flex",alignItems:"flex-end",justifyContent:"center",paddingBottom:"20px",pointerEvents:"none" }}>
+                      <motion.span
+                        style={{ backgroundColor:"#fff",color:"#2563eb",fontWeight:700,fontSize:"13px",padding:"8px 24px",borderRadius:"12px",boxShadow:"0 4px 16px rgba(0,0,0,0.3)" }}
+                        animate={{ y: isHov ? 0 : 20, opacity: isHov ? 1 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {t.products.details}
+                      </motion.span>
                     </div>
                   </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+
+                  <div className={`p-6 ${isAr?"text-right":"text-left"}`}>
+                    <h3 className="text-lg font-black mb-3" style={{ color:"var(--text-main)" }}>{c.title}</h3>
+                    <div className="flex items-center justify-between">
+                      <span className="flex items-center gap-2 font-bold text-sm" style={{ color:"var(--accent-blue)" }}>
+                        {isAr?"التفاصيل":"Details"}
+                        {isAr?<ChevronLeft className="w-4 h-4"/>:<ChevronRight className="w-4 h-4"/>}
+                      </span>
+                      <motion.div className="w-8 h-8 rounded-xl flex items-center justify-center"
+                        style={{ backgroundColor:"var(--bg-card2)" }}
+                        animate={{ rotate: isHov ? 45 : 0 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      >
+                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor:"var(--accent-blue)" }}/>
+                      </motion.div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      {mounted && selectedId && (
-        <ProductPopup selectedId={selectedId} onClose={()=>setSelectedId(null)} isAr={isAr} t={t}/>
-      )}
+      <AnimatePresence>
+        {mounted && selectedId && (
+          <ProductPopup selectedId={selectedId} onClose={()=>setSelectedId(null)} isAr={isAr} t={t}/>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
