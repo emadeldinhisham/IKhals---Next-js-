@@ -7,7 +7,7 @@ export const translations = {
       badge: "الريادة في صناعة البلاستيك ✨",
       title: "الإخلاص",
       subtitle: "للصناعات البلاستيكية",
-      desc: "تأسست شركة الإخلاص للصناعات البلاستيكية عام 2013، وأصبحت واحدة من الشركات الرائدة في تصنيع أكياس ورولات المنسوجات من البولي بروبلين (PP) في منطقة الشرق الأوسط. نُصنّع أكياساً صناعية عالية الجودة وفقاً لمعايير عالمية، وقادرة على تحمل أقسى الظروف البيئية.",
+      desc: "في شركة الإخلاص، نفخر بإنتاج أجود أنواع الأكياس التي تتميز بالمتانة والقابلية لإعادة التدوير في صناعة اللدائن. تُصنع أكياسنا من مواد بوليمرية عالية الجودة، مما يجعلها قادرة على تحمل مختلف الظروف البيئية، فضلاً عن إمكانية إعادة استخدامها أو تدويرها بعد",
       cta1: "اكتشف منتجاتنا",
       cta2: "تواصل معنا",
     },
@@ -26,8 +26,8 @@ export const translations = {
     about: {
       title: "الإخلاص للصناعات البلاستيكية",
       paragraphs: [
-        "في شركة الإخلاص، نفخر بإنتاج بعض من أجود الأكياس البلاستيكية المتينة والقابلة لإعادة التدوير في صناعة اللدائن.",
-        "تُصنع أكياسنا من مواد بوليمرية عالية الجودة قادرة على تحمل مختلف الظروف البيئية، ويمكن إعادة استخدامها أو تدويرها بعد الاستخدام.",
+        "في شركة الإخلاص للصناعات البلاستيكية، نفخر بإنتاج مجموعة من أجود الأكياس الصناعية المتينة والقابلة لإعادة التدوير.",
+        "منتجاتنا مصنوعة من مواد بوليمر عالية الجودة قادرة على تحمل أقسى الظروف البيئية.",
       ],
       valuesTitle: "قيمنا",
       valuesText: "تُعد شركة الاخلاص رائداً معترفاً به في مجالي الابتكار والجودة، حيث نقدم حلولاً بلاستيكية شاملة ومخصصة تم تصميمها بدقة لتلبي الاحتياجات المحددة لصناعتكم. نحن ملتزمون بأن نكون شريككم المفضل عبر تقديم قيمة استثنائية تفوق التوقعات.",
@@ -50,61 +50,6 @@ export const translations = {
       title: "منتجاتنا",
       details: "التفاصيل",
       items: [
-        {
-          id: "woven-rolls",
-          title: "رولات منسوجة",
-          image: "/img/rolls.jpg",
-          children: [
-            {
-              id: "plain-roll",
-              title: "رول سادة",
-              image: "/img/plain-roll.png",
-              features: [
-                "نسيج بولي بروبلين نقي",
-                "مقاومة عالية للشد والضغط",
-                "مناسب للتصنيع والتغليف الصناعي",
-                "خفيف الوزن ومتين",
-              ],
-              specs: [
-                "عرض: 20 - 200 سم",
-                "وزن: 50 - 120 جم/م²",
-                "ألوان متعددة حسب الطلب",
-              ],
-            },
-            {
-              id: "laminated-roll",
-              title: "رول مطلي",
-              image: "/img/laminated-roll.png",
-              features: [
-                "طبقة BOPP أو PE للحماية الفائقة",
-                "مقاومة ممتازة للرطوبة والماء",
-                "مظهر لامع واحترافي",
-                "مناسب للطباعة عالية الجودة",
-              ],
-              specs: [
-                "سماكة الطلاء: 15 - 25 ميكرون",
-                "عرض: 20 - 200 سم",
-                "سطح جاهز للطباعة",
-              ],
-            },
-            {
-              id: "printed-roll",
-              title: "رول مطبوع",
-              image: "/img/printed-roll.png",
-              features: [
-                "طبقات متعددة مدمجة معاً",
-                "قوة تحمل فائقة للأحمال الثقيلة",
-                "حماية ممتازة من العوامل الخارجية",
-                "مناسب للتطبيقات الصناعية الثقيلة",
-              ],
-              specs: [
-                "عدد الطبقات: 2 - 4 طبقات",
-                "عرض: 20 - 200 سم",
-                "وزن: 80 - 200 جم/م²",
-              ],
-            },
-          ],
-        },
         {
           id: "woven-bags",
           title: "أكياس منسوجة",
@@ -156,6 +101,61 @@ export const translations = {
                 "حتى 6 ألوان طباعة",
                 "أحجام متعددة حسب الطلب",
                 "طباعة على الوجهين",
+              ],
+            },
+          ],
+        },
+        {
+          id: "woven-rolls",
+          title: "رولات منسوجة",
+          image: "/img/rolls.jpg",
+          children: [
+            {
+              id: "plain-roll",
+              title: "رول سادة",
+              image: "/img/plain-roll.png",
+              features: [
+                "نسيج بولي بروبلين نقي",
+                "مقاومة عالية للشد والضغط",
+                "مناسب للتصنيع والتغليف الصناعي",
+                "خفيف الوزن ومتين",
+              ],
+              specs: [
+                "عرض: 20 - 200 سم",
+                "وزن: 50 - 120 جم/م²",
+                "ألوان متعددة حسب الطلب",
+              ],
+            },
+            {
+              id: "laminated-roll",
+              title: "رول مطلي",
+              image: "/img/laminated-roll.png",
+              features: [
+                "طبقة BOPP أو PE للحماية الفائقة",
+                "مقاومة ممتازة للرطوبة والماء",
+                "مظهر لامع واحترافي",
+                "مناسب للطباعة عالية الجودة",
+              ],
+              specs: [
+                "سماكة الطلاء: 15 - 25 ميكرون",
+                "عرض: 20 - 200 سم",
+                "سطح جاهز للطباعة",
+              ],
+            },
+            {
+              id: "printed-roll",
+              title: "رول مطبوع",
+              image: "/img/printed-roll.png",
+              features: [
+                "طبقات متعددة مدمجة معاً",
+                "قوة تحمل فائقة للأحمال الثقيلة",
+                "حماية ممتازة من العوامل الخارجية",
+                "مناسب للتطبيقات الصناعية الثقيلة",
+              ],
+              specs: [
+                "عدد الطبقات: 2 - 4 طبقات",
+                "عرض: 20 - 200 سم",
+                "وزن: 80 - 200 جم/م²",
               ],
             },
           ],
@@ -215,7 +215,7 @@ export const translations = {
       badge: "Leading Plastic Industry ✨",
       title: "Al Ikhlas",
       subtitle: "For Plastic Industries",
-      desc: "Founded in 2013, Al-Ikhlas for Plastic Industries has emerged as a leading manufacturer of Woven Polypropylene (PP) Bags and Rolls in the Middle East. We manufacture high-quality industrial bags designed for global standards and withstand the harshest environmental conditions.",
+      desc: "At Al-Ikhlas, we are proud to produce some of the finest, durable, and recyclable bags in the plastic industry. Our bags are made of high-quality polymer materials that can withstand various environmental conditions and can be reused or recycled after use.",
       cta1: "Explore Products",
       cta2: "Contact Us",
     },
@@ -234,8 +234,8 @@ export const translations = {
     about: {
       title: "Al Ikhlas For Plastic Industries",
       paragraphs: [
-        "At Al-Ikhlas, we are proud to produce some of the finest, durable, and recyclable bags in the plastic industry.",
-        "Our bags are made of high-quality polymer materials that can withstand various environmental conditions and can be reused or recycled after use.",
+        "Founded in 2013, Al-Ikhlas for Plastic Industries has emerged as a leading manufacturer of Woven Polypropylene (PP) Bags and Rolls in the Middle East.",
+        "We manufacture high-quality industrial bags designed for global standards and withstand the harshest environmental conditions.",
       ],
       valuesTitle: "Our Values",
       valuesText: "Al-Ikhlas, a recognized leader in innovation and quality, offers comprehensive and customized plastic solutions tailored to your specific industry needs. We are committed to becoming your preferred partner and delivering exceptional value that exceeds expectations.",
@@ -258,61 +258,6 @@ export const translations = {
       title: "Our Products",
       details: "Details",
       items: [
-        {
-          id: "woven-rolls",
-          title: "Woven Rolls",
-          image: "/img/plain-roll.png",
-          children: [
-            {
-              id: "plain-roll",
-              title: "Plain Roll",
-              image: "/img/plain-roll.png",
-              features: [
-                "Pure polypropylene fabric",
-                "High tensile and pressure resistance",
-                "Suitable for industrial manufacturing and packaging",
-                "Lightweight and durable",
-              ],
-              specs: [
-                "Width: 20 - 200 cm",
-                "Weight: 50 - 120 g/m²",
-                "Multiple colors on request",
-              ],
-            },
-            {
-              id: "laminated-roll-roll",
-              title: "Laminated Roll",
-              image: "/img/laminated-roll.png",
-              features: [
-                "BOPP or PE coating for superior protection",
-                "Excellent moisture and water resistance",
-                "Glossy professional finish",
-                "Print-ready surface for high quality printing",
-              ],
-              specs: [
-                "Coating thickness: 15 - 25 microns",
-                "Width: 20 - 200 cm",
-                "Print-ready surface",
-              ],
-            },
-            {
-              id: "printed-roll",
-              title: "Printed Roll",
-              image: "/img/printed-roll.png",
-              features: [
-                "Multiple integrated layers bonded together",
-                "Superior load bearing strength for heavy loads",
-                "Excellent protection from external elements",
-                "Suitable for heavy industrial applications",
-              ],
-              specs: [
-                "Number of layers: 2 - 4 layers",
-                "Width: 20 - 200 cm",
-                "Weight: 80 - 200 g/m²",
-              ],
-            },
-          ],
-        },
         {
           id: "woven-bags",
           title: "Woven Bags",
@@ -364,6 +309,61 @@ export const translations = {
                 "Up to 6 print colors",
                 "Multiple sizes on request",
                 "Double-sided printing",
+              ],
+            },
+          ],
+        },
+        {
+          id: "woven-rolls",
+          title: "Woven Rolls",
+          image: "/img/plain-roll.png",
+          children: [
+            {
+              id: "plain-roll",
+              title: "Plain Roll",
+              image: "/img/plain-roll.png",
+              features: [
+                "Pure polypropylene fabric",
+                "High tensile and pressure resistance",
+                "Suitable for industrial manufacturing and packaging",
+                "Lightweight and durable",
+              ],
+              specs: [
+                "Width: 20 - 200 cm",
+                "Weight: 50 - 120 g/m²",
+                "Multiple colors on request",
+              ],
+            },
+            {
+              id: "laminated-roll-roll",
+              title: "Laminated Roll",
+              image: "/img/laminated-roll.png",
+              features: [
+                "BOPP or PE coating for superior protection",
+                "Excellent moisture and water resistance",
+                "Glossy professional finish",
+                "Print-ready surface for high quality printing",
+              ],
+              specs: [
+                "Coating thickness: 15 - 25 microns",
+                "Width: 20 - 200 cm",
+                "Print-ready surface",
+              ],
+            },
+            {
+              id: "printed-roll",
+              title: "Printed Roll",
+              image: "/img/printed-roll.png",
+              features: [
+                "Multiple integrated layers bonded together",
+                "Superior load bearing strength for heavy loads",
+                "Excellent protection from external elements",
+                "Suitable for heavy industrial applications",
+              ],
+              specs: [
+                "Number of layers: 2 - 4 layers",
+                "Width: 20 - 200 cm",
+                "Weight: 80 - 200 g/m²",
               ],
             },
           ],
