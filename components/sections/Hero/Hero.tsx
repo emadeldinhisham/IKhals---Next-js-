@@ -2,8 +2,8 @@
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import CinematicSection from "@/components/effects/CinematicSection";
-import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring, useTransform, Variants } from "framer-motion";
 import { ArrowLeft, ArrowRight, ShieldCheck, Cpu, Smile } from "lucide-react";
 import Particles from "@/components/effects/Particles";
 
@@ -85,12 +85,13 @@ export default function Hero() {
     },
   ];
 
-  /* variants للنص — دخول متتابع بدل transitionDelay يدوي */
-  const textCol = {
+  /* variants للنص مع تحديد الأنواع بدقة لتفادي أخطاء الـ Build */
+  const textCol: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
   };
-  const fadeUp = {
+
+  const fadeUp: Variants = {
     hidden: { opacity: 0, y: 24 },
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
   };
@@ -185,8 +186,8 @@ export default function Hero() {
                 style={{ background: "linear-gradient(135deg, #3b82f6, #6366f1)", boxShadow: "0 8px 32px rgba(99,102,241,0.35)" }}>
                 {t.hero.cta1}
                 {isAr
-                  ? <ArrowLeft  className="w-4 h-4 group-hover:-translate-x-1 transition-transform"/>
-                  : <ArrowRight className="w-4 h-4 group-hover:translate-x-1  transition-transform"/>}
+                  ? <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform"/>
+                  : <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform"/>}
               </motion.a>
 
               <motion.a href="#contact"
@@ -261,7 +262,7 @@ export default function Hero() {
                   style={{ background: "linear-gradient(to top, rgba(10,15,30,0.5) 0%, transparent 40%)" }}/>
               </div>
 
-              {/* دائرة الخبرة — عدد متحرك + تعويم هادئ مستمر */}
+              {/* دائرة الخبرة */}
               <motion.div
                 className="absolute bottom-[-28px] left-[-28px] z-20 w-[180px] h-[180px] rounded-full flex flex-col items-center justify-center text-center"
                 style={{ background: "linear-gradient(135deg, #1e2d4a 0%, #0f172a 60%)", border: "5px solid var(--bg-main)", boxShadow: "0 20px 60px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.1)" }}
@@ -288,7 +289,7 @@ export default function Hero() {
                 </p>
               </motion.div>
 
-              {/* بطاقة عائمة — تعويم هادئ مستمر بإيقاع مختلف */}
+              {/* بطاقة عائمة */}
               <motion.div
                 className="absolute top-[-16px] right-[-16px] z-20 rounded-2xl px-5 py-3"
                 style={{ background: "linear-gradient(135deg, #1e2d4a, #0f172a)", border: "1px solid rgba(251,191,36,0.3)", boxShadow: "0 8px 32px rgba(251,191,36,0.15)" }}
