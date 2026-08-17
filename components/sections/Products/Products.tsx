@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { X, ChevronLeft, ChevronRight, CheckCircle, Ruler } from "lucide-react";
 
 /* ══════════════════════════════════════════
-   SVG FALLBACKS (unchanged — same as your original)
+   SVG FALLBACKS
 ══════════════════════════════════════════ */
 function RollSVG({ hovered }: { hovered?: boolean }) {
   return (
@@ -174,8 +174,7 @@ function usePreloadImages(srcs: string[]) {
 }
 
 /* ══════════════════════════════════════════
-   CARD IMAGE — صورة مع skeleton + shared layout id
-   (layoutId هو سر الـ "magic move" مع البوب أب)
+   CARD IMAGE
 ══════════════════════════════════════════ */
 function CardImage({ src, alt, id, hovered, priority }: { src:string; alt:string; id:string; hovered:boolean; priority?:boolean }) {
   const [error,  setError]  = useState(false);
@@ -278,7 +277,7 @@ function PopupImage({ src, alt, id }: { src:string; alt:string; id:string }) {
 }
 
 /* ══════════════════════════════════════════
-   POPUP — دخول/خروج سينمائي + magic move من الكارد
+   POPUP
 ══════════════════════════════════════════ */
 function ProductPopup({ selectedId, onClose, isAr, t }: { selectedId:string; onClose:()=>void; isAr:boolean; t:any }) {
   const allItems: any[] = [];
@@ -294,11 +293,11 @@ function ProductPopup({ selectedId, onClose, isAr, t }: { selectedId:string; onC
     return () => { document.body.style.overflow = ""; };
   }, []);
 
-  const listStagger = {
+  const listStagger: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.06, delayChildren: 0.15 } },
   };
-  const listItem = {
+  const listItem: Variants = {
     hidden: { opacity: 0, x: isAr ? 12 : -12 },
     show: { opacity: 1, x: 0, transition: { duration: 0.3 } },
   };
@@ -410,11 +409,12 @@ export default function Products() {
   const active = products.find((p:any)=>p.id===activeId) || products[0];
   const cards  = active.children ? active.children : [active];
 
-  const gridVariants = {
+  const gridVariants: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.1 } },
   };
-  const cardVariants = {
+
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 32, scale: 0.96 },
     show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 260, damping: 24 } },
   };
@@ -440,7 +440,7 @@ export default function Products() {
           <div className="mt-4 w-20 h-1 bg-gradient-to-r from-blue-500 to-yellow-400 rounded-full mx-auto"/>
         </motion.div>
 
-        {/* TABS — مؤشر متحرك بدل تبديل فجائي */}
+        {/* TABS */}
         <div className="flex justify-center gap-3 mb-12 flex-wrap">
           {products.map((p:any)=>(
             <button key={p.id} onClick={()=>setActiveId(p.id)}
@@ -459,7 +459,7 @@ export default function Products() {
           ))}
         </div>
 
-        {/* CARDS — دخول متتابع + تبديل ناعم عند تغيير التاب */}
+        {/* CARDS */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeId}
